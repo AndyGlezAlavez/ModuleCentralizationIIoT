@@ -10,11 +10,9 @@ namespace ModuleCentralizationIIoT.Domain.Entities
 {
     public abstract class Entity
     {
-        //1 2 3 flechita ingles
         ///identificador en el soporte de datos
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id {  get; set; }
+
+        public Guid Id {  get; set; }
 
     }
 }

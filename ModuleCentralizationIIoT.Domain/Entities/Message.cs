@@ -11,20 +11,20 @@ namespace ModuleCentralizationIIoT.Domain.Entities
     public class Message :Entity
     {
         #region Prorperties
-        public int IdMessage {  get; set; }
         public string Text { get; set; }
         public DateTime CreationMessage { get; set; }
         public Priority Priority { get; set; }
         //relacion con su modulo correspondiente
-        [NotMapped]
-        public ModuleIIoT Module { get; set; }
-        public int IdModuleIIoT { get; set; }
+        public Guid ModuleIIoTId {  get; set; }
+        public ModuleIIoT ModuleIIoT{ get; set; }
         #endregion
 
-        public Message(string text, DateTime creationMessage, ModuleIIoT module)
+        protected Message() { }
+
+        public Message(string text, DateTime creationMessage, ModuleIIoT moduleIIoT)
         {
             Text = text;
-            Module = module;
+            ModuleIIoT = moduleIIoT;
             CreationMessage = creationMessage;
         }
     }

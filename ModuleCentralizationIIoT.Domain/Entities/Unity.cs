@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.Domain.Entities
 {
-    public class Unities : Entity
+    public class Unity : Entity
     {
         #region properties
-        public int IdUnities {  get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string Area { get; set; }
         // cada unidad puede ser atendida por varios modulos
-        [NotMapped]
-        public ModuleIIoT ModuleIIoT { get; set; }
+        public List<ModuleIIoT> ModuleIIoTs { get; set; }
         #endregion
 
-        public Unities(string code, string name) 
+        protected Unity() { }
+        public Unity(string code, string name)
         {
             Code = code;
             Name = name;
-            Area= string.Empty;
+            Area = string.Empty;
         }
+
     }
 }

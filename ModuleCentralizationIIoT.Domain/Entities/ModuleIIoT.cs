@@ -11,7 +11,6 @@ namespace ModuleCentralizationIIoT.Domain.Entities
     public class ModuleIIoT :Entity
     {
         #region
-        public int IdModuleIIoT { get; set; }
         public string Name { get; set; }
         public string AddresIp { get; set; }
         public string AccessPort
@@ -19,22 +18,29 @@ namespace ModuleCentralizationIIoT.Domain.Entities
             get {  return AccessPort; }
             set
             {
-
+                if (value.Length > 4)
+                {
+                    AccessPort = null;
+                }
+                AccessPort = value;
             } 
-        }//puerto de acceso de 4 cifras
-        // modulo tiene varias unidades
-        [NotMapped]
-        public List<Unities> Unities { get; set; }
-        //cada modulo puede tener varios mensajes
-        [NotMapped]
-        public List<Message> Message { get; set; }
+        }
+  
+ 
         public bool IsConnected { get; set; }
 
+
+        public List<Unity> Unities { get; set; }
+
+        public List<Message> Messages { get; set; }
         #endregion
-        public ModuleIIoT(string name, string addessIp) 
+
+        protected ModuleIIoT() { }
+
+        public ModuleIIoT(string name, string addressIp) 
         {
             Name = name;
-            AddresIp = addessIp;
+            AddresIp = addressIp;
             IsConnected = false;
         }
 
