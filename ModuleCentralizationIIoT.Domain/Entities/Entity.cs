@@ -14,5 +14,9 @@ namespace ModuleCentralizationIIoT.Domain.Entities
 
         public Guid Id {  get; set; }
 
+        protected Entity() { }
+
+        protected Entity(Guid id) {  Id = id; }
+
     }
 }
