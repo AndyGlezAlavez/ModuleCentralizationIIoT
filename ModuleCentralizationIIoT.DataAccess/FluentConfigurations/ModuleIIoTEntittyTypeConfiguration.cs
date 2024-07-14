@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ModuleCentralizationIIoT.DataAccess.FluentConfigurations.Common;
 using ModuleCentralizationIIoT.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.DataAccess.FluentConfigurations
 {
-    public class ModuleIIoTEntittyTypeConfiguration
+    public class ModuleIIoTEntittyTypeConfiguration : EntityTypeConfigurationBase<ModuleIIoT>
     {
         public void Configure(EntityTypeBuilder<ModuleIIoT> builder)
         {

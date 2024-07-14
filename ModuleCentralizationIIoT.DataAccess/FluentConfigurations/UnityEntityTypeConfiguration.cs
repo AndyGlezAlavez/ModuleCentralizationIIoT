@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ModuleCentralizationIIoT.DataAccess.FluentConfigurations.Common;
 using ModuleCentralizationIIoT.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.DataAccess.FluentConfigurations
 {
-    public class UnityEntityTypeConfiguration
+    public class UnityEntityTypeConfiguration : EntityTypeConfigurationBase<Unity>
     {
         public void Configure(EntityTypeBuilder<Unity> builder)
         {

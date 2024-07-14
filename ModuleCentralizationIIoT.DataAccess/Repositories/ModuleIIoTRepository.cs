@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.DataAccess.Repositories
 {
-    internal class ModuleIIoTRepository : RepositoryBase, IModuleIIoTRepository
+    public class ModuleIIoTRepository : RepositoryBase, IModuleIIoTRepository
     {
         public ModuleIIoTRepository(ApplicationContext context) : base(context)
         {

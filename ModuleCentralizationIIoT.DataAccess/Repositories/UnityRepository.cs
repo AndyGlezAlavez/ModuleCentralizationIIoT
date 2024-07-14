@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.DataAccess.Repositories
 {
-    internal class UnityRepository : RepositoryBase, IUnityRepository
+    public class UnityRepository : RepositoryBase, IUnityRepository
     {
         public UnityRepository(ApplicationContext context) : base(context)
         {
