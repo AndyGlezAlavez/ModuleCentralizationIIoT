@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.Domain.Entities
 {
+    /// <summary>
+    /// Modela un módulo IIOT.
+    /// </summary>
     public class ModuleIIoT :Entity
     {
         #region
@@ -37,6 +40,11 @@ namespace ModuleCentralizationIIoT.Domain.Entities
 
         protected ModuleIIoT() { }
 
+        /// <summary>
+        /// Inicializa un módulo. <see cref="ModuleIIoT"/>
+        /// </summary>
+        /// <param name="name">Nombre.</param>
+        /// <param name="addressIp">Dirección IP</param>
         public ModuleIIoT(string name, string addressIp) 
         {
             Name = name;
