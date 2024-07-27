@@ -15,5 +15,9 @@ namespace ModuleCentralizationIIoT.Contracts
         void UpdateModuleIIoT(ModuleIIoT moduleIIoT);
         void DeleteModuleIIoT(ModuleIIoT moduleIIoT);
 
+        public IEnumerable<Message> GetMessageByModuleIIoT(Guid moduleId);
+
+        //agrupar mensajes que seran enviados y recibidos
+
     }
 }

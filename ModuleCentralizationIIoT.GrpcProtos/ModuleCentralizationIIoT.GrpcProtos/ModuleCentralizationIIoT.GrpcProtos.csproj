@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Protobuf Include="*.proto" GrpcServices="Both" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Remove="common.proto" />
+		<Protobuf Remove="Message.proto" />
+		<Protobuf Remove="ModuleIIoT.proto" />
+		<Protobuf Remove="Unity.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="common.proto">
+	    <GrpcServices>Server</GrpcServices>
+	  </None>
+	  <None Update="Unity.proto">
+	    <GrpcServices>Server</GrpcServices>
+	  </None>
+	  <None Update="ModuleIIoT.proto">
+	    <GrpcServices>Server</GrpcServices>
+	  </None>
+	  <None Update="Message.proto">
+	    <GrpcServices>Server</GrpcServices>
+	  </None>
+	</ItemGroup>
+
+</Project>

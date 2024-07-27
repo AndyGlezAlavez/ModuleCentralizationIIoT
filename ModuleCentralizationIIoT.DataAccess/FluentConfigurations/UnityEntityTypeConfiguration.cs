@@ -12,10 +12,10 @@ namespace ModuleCentralizationIIoT.DataAccess.FluentConfigurations
 {
     public class UnityEntityTypeConfiguration : EntityTypeConfigurationBase<Unity>
     {
-        public void Configure(EntityTypeBuilder<Unity> builder)
+        public override void Configure(EntityTypeBuilder<Unity> builder)
         {
             builder.ToTable("Unity");
-            //builder.HasMany(x => x.ModuleIIoTs).WithMany(x => x.ModuleIIoTId);
+            base.Configure(builder);
         }
     }
 }

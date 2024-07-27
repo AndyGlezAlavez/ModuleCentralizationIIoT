@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ModuleCentralizationIIoT.DataAccess.Contexts
 {
     public class ApplicationContext: DbContext
@@ -17,11 +18,24 @@ namespace ModuleCentralizationIIoT.DataAccess.Contexts
         public DbSet<Unity> Unities { get; set; }
         public DbSet<Message> Messages { get; set; }
         #endregion
+        #region Helpers
+        private static DbContextOptions GetOptions(string connectionString)
+        {
+            return SqliteDbContextOptionsBuilderExtensions.UseSqlite(
+                new DbContextOptionsBuilder(), connectionString).Options;
+        }
+        #endregion
         public ApplicationContext() { }
 
-        public ApplicationContext(string connectionString): base(GetOptions(connectionString)) { }
+        public ApplicationContext(string conectionString)
+          : base(GetOptions(conectionString))
+        {
+        }
 
-        public ApplicationContext(DbContextOptions options) : base(options) { }
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) :
+            base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -43,12 +57,6 @@ namespace ModuleCentralizationIIoT.DataAccess.Contexts
             modelBuilder.ApplyConfiguration(new UnityEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ModuleIIoTEntittyTypeConfiguration());
 
-        }
-
-
-        private static DbContextOptions GetOptions(string connectionString)
-        {
-            return SqliteDbContextOptionsBuilderExtensions.UseSqlite(new DbContextOptionsBuilder(), connectionString).Options;
         }
 
     }

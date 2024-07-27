@@ -13,20 +13,9 @@ namespace ModuleCentralizationIIoT.Domain.Entities
         #region
         public string Name { get; set; }
         public string AddresIp { get; set; }
-        public string AccessPort
-        {
-            get {  return AccessPort; }
-            set
-            {
-                if (value.Length > 4)
-                {
-                    AccessPort = null;
-                }
-                AccessPort = value;
-            } 
-        }
-  
- 
+        public string AccessPort{ get; set; }
+
+
         public bool IsConnected { get; set; }
 
 
@@ -42,6 +31,8 @@ namespace ModuleCentralizationIIoT.Domain.Entities
             Name = name;
             AddresIp = addressIp;
             IsConnected = false;
+            AccessPort = "0";
+
         }
 
     }

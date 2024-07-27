@@ -1,0 +1,42 @@
+﻿﻿syntax = "proto3";
+
+option csharp_namespace = "CarDealer.GrpcProtos";
+
+package GrpcProtos;
+
+﻿import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+import "common.proto";
+
+service Unity{
+	rpc CreateUnity(CreateUnityRequest) returns (UnityDTO);
+	rpc GetUnity(GetRequest) returns (NullableUnityDTO);
+	rpc GetAllUnity(google.protobuf.Empty) returns (Unitys);
+	rpc UpdateUnity (UnityDTO) returns (google.protobuf.Empty);
+	rpc DeleteUnity (DeleteUnity) returns (google.protobuf.Empty);
+
+}
+message UnityDTO{
+	string name=1;
+	string code=2;
+	string area=3;
+}
+
+message Unity{
+	repeated UnityDTO items = 1;
+}
+
+message NullableMUnityDTO{
+	oneof kind{
+		google.protobuf.NullValue null = 1;
+		UnityDTO unity = 2;
+	}
+
+}
+message CreateUnity{
+	string code=1;
+	string name=2;
+	string area=3;
+
+}

@@ -15,7 +15,7 @@ namespace ModuleCentralizationIIoT.Domain.Entities
         public DateTime CreationMessage { get; set; }
         public Priority Priority { get; set; }
         //relacion con su modulo correspondiente
-        public Guid ModuleIIoTId {  get; set; }
+        public Guid? ModuleIIoTId {  get; set; }
         public ModuleIIoT ModuleIIoT{ get; set; }
         #endregion
 

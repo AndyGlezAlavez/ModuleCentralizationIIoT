@@ -12,10 +12,12 @@ namespace ModuleCentralizationIIoT.DataAccess.FluentConfigurations
 {
     public class MessageEntityTypeConfiguration : EntityTypeConfigurationBase<Message>
     {
-        public void Configure(EntityTypeBuilder<Message> builder)
+        public override void Configure(EntityTypeBuilder<Message> builder)
         { 
             builder.ToTable("Message");
-            builder.HasOne(x => x.ModuleIIoT).WithMany().HasForeignKey(x=>x.ModuleIIoTId);
+            base.Configure(builder);
+            builder.HasOne(x => x.ModuleIIoT).WithMany(x => x.Messages).HasForeignKey(x=>x.ModuleIIoTId);
+
         }
     }
 }

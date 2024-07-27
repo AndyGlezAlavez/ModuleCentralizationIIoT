@@ -31,6 +31,12 @@ namespace ModuleCentralizationIIoT.DataAccess.Repositories
             return _context.ModuleIIoTs.ToList();
         }
 
+        public IEnumerable<Message>? GetMessageByModuleIIoT(Guid moduleId)
+        {
+            ModuleIIoT? module = _context.ModuleIIoTs.FirstOrDefault(t => t.Id == moduleId);
+            return module.Messages;
+        }
+
         public ModuleIIoT? GetModuleIIoTById(Guid id)
         {
             return _context?.ModuleIIoTs.FirstOrDefault(t => t.Id == id);

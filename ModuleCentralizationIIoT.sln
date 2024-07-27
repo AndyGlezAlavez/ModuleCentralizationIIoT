@@ -7,11 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.DataAccess", "ModuleCentralizationIIoT.DataAccess\ModuleCentralizationIIoT.DataAccess.csproj", "{C8372A41-E032-48C0-93D3-45D92778AE1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralization IIoT.ConsoleApp", "ModuleCentralization IIoT.ConsoleApp\ModuleCentralization IIoT.ConsoleApp.csproj", "{41D348D6-0CC9-46C4-B3C2-246827EC4531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.ConsoleApp", "ModuleCentralization IIoT.ConsoleApp\ModuleCentralizationIIoT.ConsoleApp.csproj", "{41D348D6-0CC9-46C4-B3C2-246827EC4531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleCentralizationIIoT.Contracts", "ModuleCentralizationIIoT.Contracts\ModuleCentralizationIIoT.Contracts.csproj", "{5546965C-4E1C-4A6E-848C-5A64706B110C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.Contracts", "ModuleCentralizationIIoT.Contracts\ModuleCentralizationIIoT.Contracts.csproj", "{5546965C-4E1C-4A6E-848C-5A64706B110C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleCentralizationIIoT.DataAccess.Test", "ModuleCentralizationIIoT.DataAccess.Test\ModuleCentralizationIIoT.DataAccess.Test.csproj", "{C4AFF988-E9D5-41FF-B263-03A54A529331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.DataAccess.Test", "ModuleCentralizationIIoT.DataAccess.Test\ModuleCentralizationIIoT.DataAccess.Test.csproj", "{C4AFF988-E9D5-41FF-B263-03A54A529331}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7714CCC7-79AB-439F-8C13-EE38A6741092} = {7714CCC7-79AB-439F-8C13-EE38A6741092}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.GrpcProtos", "ModuleCentralizationIIoT.GrpcProtos\ModuleCentralizationIIoT.GrpcProtos\ModuleCentralizationIIoT.GrpcProtos.csproj", "{A1F2692C-CDD8-4112-8010-06C38AE1CEA4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcService1", "GrpcService1\GrpcService1.csproj", "{714D9925-60DC-4630-AB1A-AC2AB178478A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +46,14 @@ Global
 		{C4AFF988-E9D5-41FF-B263-03A54A529331}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4AFF988-E9D5-41FF-B263-03A54A529331}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4AFF988-E9D5-41FF-B263-03A54A529331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1F2692C-CDD8-4112-8010-06C38AE1CEA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1F2692C-CDD8-4112-8010-06C38AE1CEA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1F2692C-CDD8-4112-8010-06C38AE1CEA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1F2692C-CDD8-4112-8010-06C38AE1CEA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{714D9925-60DC-4630-AB1A-AC2AB178478A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714D9925-60DC-4630-AB1A-AC2AB178478A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714D9925-60DC-4630-AB1A-AC2AB178478A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714D9925-60DC-4630-AB1A-AC2AB178478A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

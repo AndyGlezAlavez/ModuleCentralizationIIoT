@@ -3,6 +3,7 @@ using ModuleCentralizationIIoT.DataAccess.Contexts;
 using ModuleCentralizationIIoT.DataAccess.Repositories;
 using ModuleCentralizationIIoT.DataAccess.Test.Utilities;
 using ModuleCentralizationIIoT.Domain.Entities;
+using NuGet.Frameworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,11 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.DataAccess.Test
 {
+    [TestClass]
     public class MessageTest
     {
-        private IMessageRepository _messageRepository;
-        private IUnitOfWork _unitOfWork;
+        public IMessageRepository _messageRepository;
+        public IUnitOfWork _unitOfWork;
         
         public MessageTest()
         {
@@ -22,8 +24,9 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             _messageRepository= new MessageRepository(context);
             _unitOfWork= new UnitOfWork(context);
         }
-        [DataRow("Hellow World", "Modulo Zigbee", "192.168.137.5")]
-        [DataRow("Bye World", "Modulo LTE", "192.156.122.1")]
+
+        [DataRow("Hellow World","0")]
+        [DataRow("Bye World","67")]
 
         [TestMethod]
         public void Can_Add_Message(
@@ -62,7 +65,7 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             //Assert
             Assert.IsNotNull(loadedMessage);
         }
-        
+        [TestMethod]
         public void Cannot_Get_Message_By_Invalid_Id()
         {
             //Arrange
@@ -106,12 +109,15 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             Assert.IsNotNull(message);
 
             //Execute
+
+            message.Text = "prueba";
             _messageRepository.UpdateMessage(message);
             _unitOfWork.SaveChages();
 
             //Assert
             var updatedMessage = _messageRepository.GetMessageById(message.Id);
             Assert.IsNotNull(updatedMessage);
+            Assert.AreEqual(updatedMessage.Text, message.Text);
         
         }
 

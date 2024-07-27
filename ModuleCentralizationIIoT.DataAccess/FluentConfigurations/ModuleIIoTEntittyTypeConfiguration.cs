@@ -13,11 +13,11 @@ namespace ModuleCentralizationIIoT.DataAccess.FluentConfigurations
 {
     public class ModuleIIoTEntittyTypeConfiguration : EntityTypeConfigurationBase<ModuleIIoT>
     {
-        public void Configure(EntityTypeBuilder<ModuleIIoT> builder)
+        public override void Configure(EntityTypeBuilder<ModuleIIoT> builder)
         {
             builder.ToTable("ModuleIIoT");
-            // builder.HasMany(x => x.Unities).WithMany().UsingEntity(j => j.Totable("ModuleIIoT"));
-           // builder.HasOne(x => x.Unities).WithMany().HasForeignKey(x => x.UnityId);
+            base.Configure(builder);
+            builder.HasMany(x => x.Unities).WithMany(x =>x.ModuleIIoTs);
         }
     }
 }

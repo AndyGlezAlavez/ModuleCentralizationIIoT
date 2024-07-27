@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ModuleCentralizationIIoT.Contracts\ModuleCentralizationIIoT.Contracts.csproj" />
     <ProjectReference Include="..\ModuleCentralizationIIoT.DataAccess\ModuleCentralizationIIoT.DataAccess.csproj" />
+	<ProjectReference Include="..\ModuleCentralizationIIoT.Domain\ModuleCentralizationIIoT.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

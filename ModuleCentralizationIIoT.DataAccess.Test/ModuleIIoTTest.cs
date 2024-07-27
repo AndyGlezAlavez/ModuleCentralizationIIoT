@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.DataAccess.Test
 {
+    [TestClass]
     public class ModuleIIoTTest
     {
         private IModuleIIoTRepository _moduleIIoTRepository;
@@ -71,26 +72,52 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
 
             //Assert
             Assert.IsNotNull(loadedModuleIIoT);
-        }/*        [DataRow(0)]
+        }
+        [DataRow(0)]
         [TestMethod]
 
         public void Can_Delete_ModuleIIoT(int position) 
         {
             //Arrange
-            var ModuleIIoT= _moduleIIoTRepository.GetAllModuleIIoT();
-            Assert.IsNotNull(ModuleIIoT);
-            var count=ModuleIIoT.Count();
-            var moduleIIoTs= moduleIIoTs.ElementAt(position);
-            Assert.IsNotNull(moduleIIoTs);
+            var ModuleIIoTs= _moduleIIoTRepository.GetAllModuleIIoT();
+            Assert.IsNotNull(ModuleIIoTs);
+            var count =ModuleIIoTs.Count();
+            var moduleIIoT = ModuleIIoTs.ElementAt(position);
+            Assert.IsNotNull(moduleIIoT);
 
             //Execute
-            _moduleIIoTRepository.DeleteModuleIIoT(moduleIIoTs);
+            _moduleIIoTRepository.DeleteModuleIIoT(moduleIIoT);
             _unitOfWork.SaveChages();
 
-            //Assert
-            ModuleIIoTs _moduleIIoTRepository.GetAllModuleIIoT();
-            Assert.AreEqual(count-1, moduleIIoTs.Count());
-            var DeletemoduleIIoT = _moduleIIoTRepository.GetModuleIIoTById(moduleIIoTs.Id);*/
+            //Asert
+            ModuleIIoTs = _moduleIIoTRepository.GetAllModuleIIoT();
+            Assert.AreEqual(count-1,ModuleIIoTs.Count());
+            var DeletedmodukeIIoT=_moduleIIoTRepository.GetModuleIIoTById(moduleIIoT.Id);
+            Assert.IsNull(DeletedmodukeIIoT);            
+
+        }
+
+        [DataRow(0)]
+        [TestMethod]
+
+        public void Can_Update_ModuleIIoT(int position)
+        {
+            //Arrange
+            var ModuleIIoTs = _moduleIIoTRepository.GetAllModuleIIoT();
+            Assert.IsNotNull(ModuleIIoTs);
+            var moduleIIoT =ModuleIIoTs.ElementAt(position);
+            Assert.IsNotNull(moduleIIoT);
+
+            //Excecute
+            moduleIIoT.Name = "prueba";
+            _moduleIIoTRepository.UpdateModuleIIoT(moduleIIoT);
+            _unitOfWork.SaveChages();
+
+            //Asert
+            var updateModuleIIoT = _moduleIIoTRepository.GetModuleIIoTById(moduleIIoT.Id);
+            Assert.IsNotNull(updateModuleIIoT);
+            Assert.AreEqual(updateModuleIIoT.Name, moduleIIoT.Name);
+
         }
 
     }

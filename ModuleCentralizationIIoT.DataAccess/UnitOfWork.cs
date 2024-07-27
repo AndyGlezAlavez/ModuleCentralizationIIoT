@@ -16,7 +16,7 @@ namespace ModuleCentralizationIIoT.DataAccess
         public UnitOfWork(ApplicationContext context)
         {
             _context = context;
-            if(context.Database.CanConnect())
+            if(!context.Database.CanConnect())
                 context.Database.Migrate();
         }
 
