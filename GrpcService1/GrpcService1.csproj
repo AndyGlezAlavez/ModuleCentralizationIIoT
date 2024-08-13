@@ -11,7 +11,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModuleCentralizationIIoT.Contracts\ModuleCentralizationIIoT.Contracts.csproj" />
+    <ProjectReference Include="..\ModuleCentralizationIIoT.DataAccess\ModuleCentralizationIIoT.DataAccess.csproj" />
+    <ProjectReference Include="..\ModuleCentralizationIIoT.Domain\ModuleCentralizationIIoT.Domain.csproj" />
+    <ProjectReference Include="..\ModuleCentralizationIIoT.GrpcProtos\ModuleCentralizationIIoT.GrpcProtos\ModuleCentralizationIIoT.GrpcProtos.csproj" />
   </ItemGroup>
 
 </Project>

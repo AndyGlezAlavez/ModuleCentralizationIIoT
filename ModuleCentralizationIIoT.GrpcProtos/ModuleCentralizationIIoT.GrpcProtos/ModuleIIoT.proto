@@ -1,31 +1,26 @@
-﻿﻿syntax = "proto3";
+﻿syntax = "proto3";
 
-option csharp_namespace = "CarDealer.GrpcProtos";
+option csharp_namespace = "ModuleCentralizarionIIoT.GrpcProtos";
 
 package GrpcProtos;
 
-﻿import "google/protobuf/wrappers.proto";
+import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "common.proto";
+//import "Message.proto";
 
 service ModuleIIoT{
 	rpc CreateModuleIIoT (CreateModuleIIoTRequest) returns (ModuleIIoTDTO);
 	rpc GetModuleIIoT (GetRequest) returns (NullableModuleIIoTDTO);
-	rpc GetAllModuleIIoT (google.protobuf.Empty) returns (Messages);
+	rpc GetAllModuleIIoT (google.protobuf.Empty) returns (ModulesIIoT);
 	rpc UpdateModuleIIoT (ModuleIIoTDTO) returns (google.protobuf.Empty);
-	rpc DeleteModuleIIoT (DeleteMOduleIIoT) returns (google.protobuf.Empty);
+	rpc DeleteModuleIIoT (DeleteRequest) returns (google.protobuf.Empty);
 }
 
-message ModuleIIoTDTO{
-	string id=1;
-	string name=2;
-	string addressIp=2;
-	string accessport=3;
-	bool isConnected=4;
-}
 
-message ModuleIIoT{
+
+message ModulesIIoT{
 	repeated ModuleIIoTDTO items = 1;
 }
 
@@ -36,8 +31,15 @@ message NullableModuleIIoTDTO{
 	}
 
 }
-message CreateModuleIIoT{
+message CreateModuleIIoTRequest{
 	string name=1;
 	string addressIp=2;
 	bool isConnected=3;
+}
+message ModuleIIoTDTO{
+	string id=1;
+	string name=2;
+	string addressIp=3;
+	string accessport=4;
+	bool isConnected=5;
 }

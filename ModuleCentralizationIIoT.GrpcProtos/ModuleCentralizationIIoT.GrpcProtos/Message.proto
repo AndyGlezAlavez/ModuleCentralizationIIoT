@@ -1,15 +1,16 @@
-﻿﻿syntax = "proto3";
+﻿syntax = "proto3";
 
-option csharp_namespace = "CarDealer.GrpcProtos";
+option csharp_namespace = "ModuleCentralizationIIoT.GrpcProtos";
 
 package GrpcProtos;
 
-﻿import "google/protobuf/wrappers.proto";
+import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "common.proto";
 import "ModuleIIoT.proto";
+
 
 service Message {
 
@@ -17,17 +18,12 @@ service Message {
 	rpc GetMessage(GetRequest) returns (NullableMessageDTO);
 	rpc GetAllMessages (google.protobuf.Empty) returns (Messages);
 	rpc UpdateMessage (MessageDTO) returns (google.protobuf.Empty);
-	rpc DeleteMessage (DeleteMessage) returns (google.protobuf.Empty);
+	rpc DeleteMessage (DeleteRequest) returns (google.protobuf.Empty);
 
 }
 
-message MessageDTO{
-	string id=1;
-	string text=2;
-    google.protobuf.Timestamp creationMessage = 3;
-	ModuleIIoT moduleIIoT=4;
-}
-message Message{
+
+message Messages{
 	repeated MessageDTO items = 1;
 }
 
@@ -38,9 +34,16 @@ message NullableMessageDTO{
 	}
 	
 }
-message CreateMessage{
+message MessageDTO{
+	string id=1;
+	string text=2;
+    google.protobuf.Timestamp creationMessage = 3;
+	ModuleIIoTDTO moduleIIoT=4;
+}
+
+message CreateMessageRequest{
 		string text=1;
-		ModuleIIoT moduleIIoT=2;
+		ModuleIIoTDTO moduleIIoT=2;
 		google.protobuf.Timestamp creationMessage = 3;
 
 	}

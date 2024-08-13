@@ -11,12 +11,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Protobuf Remove="common.proto" />
-		<Protobuf Remove="Message.proto" />
-		<Protobuf Remove="ModuleIIoT.proto" />
-		<Protobuf Remove="Unity.proto" />
+	  <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
 	  <None Update="common.proto">
 	    <GrpcServices>Server</GrpcServices>

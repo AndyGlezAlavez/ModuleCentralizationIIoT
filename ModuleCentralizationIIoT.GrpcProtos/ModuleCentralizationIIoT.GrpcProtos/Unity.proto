@@ -1,10 +1,10 @@
-﻿﻿syntax = "proto3";
+﻿syntax = "proto3";
 
-option csharp_namespace = "CarDealer.GrpcProtos";
+option csharp_namespace="ModuleCentralizationIIoT.Grpcprotos";
 
 package GrpcProtos;
 
-﻿import "google/protobuf/wrappers.proto";
+import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "common.proto";
@@ -12,9 +12,9 @@ import "common.proto";
 service Unity{
 	rpc CreateUnity(CreateUnityRequest) returns (UnityDTO);
 	rpc GetUnity(GetRequest) returns (NullableUnityDTO);
-	rpc GetAllUnity(google.protobuf.Empty) returns (Unitys);
+	rpc GetAllUnity(google.protobuf.Empty) returns (Unities);
 	rpc UpdateUnity (UnityDTO) returns (google.protobuf.Empty);
-	rpc DeleteUnity (DeleteUnity) returns (google.protobuf.Empty);
+	rpc DeleteUnity (DeleteRequest) returns (google.protobuf.Empty);
 
 }
 message UnityDTO{
@@ -23,18 +23,18 @@ message UnityDTO{
 	string area=3;
 }
 
-message Unity{
+message Unities{
 	repeated UnityDTO items = 1;
 }
 
-message NullableMUnityDTO{
+message NullableUnityDTO{
 	oneof kind{
 		google.protobuf.NullValue null = 1;
 		UnityDTO unity = 2;
 	}
 
 }
-message CreateUnity{
+message CreateUnityRequest{
 	string code=1;
 	string name=2;
 	string area=3;
