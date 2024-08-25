@@ -11,6 +11,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="ModuleIIoT.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
 	</ItemGroup>
 	
@@ -19,9 +23,6 @@
 	    <GrpcServices>Server</GrpcServices>
 	  </None>
 	  <None Update="Unity.proto">
-	    <GrpcServices>Server</GrpcServices>
-	  </None>
-	  <None Update="ModuleIIoT.proto">
 	    <GrpcServices>Server</GrpcServices>
 	  </None>
 	  <None Update="Message.proto">

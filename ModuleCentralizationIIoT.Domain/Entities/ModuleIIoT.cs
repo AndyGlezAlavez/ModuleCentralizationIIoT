@@ -12,7 +12,7 @@ namespace ModuleCentralizationIIoT.Domain.Entities
     {
         #region
         public string Name { get; set; }
-        public string AddresIp { get; set; }
+        public string AddressIp { get; set; }
         public string AccessPort{ get; set; }
 
 
@@ -26,10 +26,10 @@ namespace ModuleCentralizationIIoT.Domain.Entities
 
         protected ModuleIIoT() { }
 
-        public ModuleIIoT(string name, string addressIp) 
+        public ModuleIIoT(Guid id, string name, string addressIp) : base(id) 
         {
             Name = name;
-            AddresIp = addressIp;
+            AddressIp = addressIp;
             IsConnected = false;
             AccessPort = "0";
 

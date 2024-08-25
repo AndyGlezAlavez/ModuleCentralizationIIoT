@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace="ModuleCentralizationIIoT.Grpcprotos";
+option csharp_namespace = "ModuleCentralizationIIoT.GrpcProtos.Unity";
 
 package GrpcProtos;
 
@@ -18,9 +18,10 @@ service Unity{
 
 }
 message UnityDTO{
-	string name=1;
-	string code=2;
-	string area=3;
+	string id=1;
+	string name=2;
+	string code=3;
+	string area=4;
 }
 
 message Unities{

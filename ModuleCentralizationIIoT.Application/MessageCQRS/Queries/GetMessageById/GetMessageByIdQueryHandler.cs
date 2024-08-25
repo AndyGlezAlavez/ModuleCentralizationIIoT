@@ -1,0 +1,24 @@
+﻿using ModuleCentralizationIIoT.Application.Abstract;
+using ModuleCentralizationIIoT.Contracts;
+using ModuleCentralizationIIoT.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ModuleCentralizationIIoT.Application.MessageCQRS.Queries.GetMessageById
+{
+    public class GetMessageByIdQueryHandler : IQueryHandler<GetMessageByIdQuery, Message?>
+    {
+        private readonly IMessageRepository _messageRepository;
+        GetMessageByIdQueryHandler(IMessageRepository messageRepository) 
+        {
+            _messageRepository = messageRepository;
+        }
+        public Task<Message?> Handle(GetMessageByIdQuery request, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(_messageRepository.GetMessageById(request.id));
+        }
+    }
+}

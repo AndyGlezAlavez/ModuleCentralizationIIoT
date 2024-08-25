@@ -21,11 +21,12 @@ namespace ModuleCentralizationIIoT.Domain.Entities
 
         protected Message() { }
 
-        public Message(string text, ModuleIIoT moduleIIoT)
+        public Message(Guid id ,string text, ModuleIIoT moduleIIoT) : base(id)
         {
             Text = text;
             ModuleIIoT = moduleIIoT;
             CreationMessage = DateTime.Now;
+            Priority = Priority.Low;
         }
     }
 }

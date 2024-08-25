@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "ModuleCentralizationIIoT.GrpcProtos";
+option csharp_namespace = "ModuleCentralizationIIoT.GrpcProtos.Message";
 
 package GrpcProtos;
 
