@@ -17,7 +17,5 @@ namespace ModuleCentralizationIIoT.Contracts
 
         public IEnumerable<Message> GetMessageByModuleIIoT(Guid moduleId);
 
-        //agrupar mensajes que seran enviados y recibidos
-
     }
 }

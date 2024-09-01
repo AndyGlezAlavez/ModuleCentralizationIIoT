@@ -4,6 +4,14 @@ using Grpc.Core;
 using MediatR;
 using ModuleCentralizationIIoT.GrpcProtos.Message;
 using ModuleCentralizationIIoT.GrpcProtos;
+using ModuleCentralizationIIoT.Contracts;
+using ModuleCentralizationIIoT.Application.MessageCQRS.Commands.CreateMessage;
+using ModuleCentralizationIIoT.Application.MessageCQRS.Commands.DeleteMessage;
+using ModuleCentralizationIIoT.Application.UnityCQRS.Commands.UpdateUnity;
+using ModuleCentralizationIIoT.Application.UnityCQRS.Queries.GetAllUnity;
+using ModuleCentralizationIIoT.GrpcProtos.Unity;
+using ModuleCentralizationIIoT.Application.UnityCQRS.Queries.GetUnityById;
+using ModuleCentralizationIIoT.Application.MessageCQRS.Commands.UpdateMessage;
 
 namespace GrpcService1.Services
 {
@@ -20,36 +28,61 @@ namespace GrpcService1.Services
                 _mapper = mapper;
             }
 
+            private readonly IMessageRepository _messageRepository;
+            private readonly IUnitOfWork _unitOfWork;
+
+            public MesageServvice(IMessageRepository messageRepository, IUnitOfWork unitOfWork)
+            {
+                _messageRepository = messageRepository;
+                _unitOfWork = unitOfWork;
+            }
             public override Task<MessageDTO> CreateMessage(CreateMessageRequest request, ServerCallContext context)
             {
-                return base.CreateMessage(request, context);
+                var command = new CreateMessageCommand(
+                    request.Text,
+                   _mapper.Map<ModuleCentralizationIIoT.Domain.Entities.ModuleIIoT>(request.ModuleIIoT));
+
+                var result = _mediator.Send(command).Result;
+
+                return Task.FromResult(_mapper.Map<MessageDTO>(result));
             }
-
-            //public override Task<MessageDTO> CreateMessage(CreateMessageRequest request, ServerCallContext context)
-            //{
-            //    var command = new CreateModuleIIoTCommand(
-            //        request.Text,
-            //        request.ModuleIIoT);
-
-            //    var result = _mediator.Send(command).Result;
-
-            //    return Task.FromResult(_mapper.Map<MessageDTO>(result));
-            //}
             public override Task<NullableMessageDTO> GetMessage(GetRequest request, ServerCallContext context)
             {
-                return base.GetMessage(request, context);
+                var query = new GetUnityByIdQuery(new Guid(request.Id));
+
+                var result = _mediator.Send(query).Result;
+
+                if (result == null) 
+                    return Task.FromResult(new NullableMessageDTO() { Message = _mapper.Map<MessageDTO>(result) });
+                return Task.FromResult(new NullableMessageDTO() { Message= _mapper.Map<MessageDTO>(result) }) ;
             }
             public override Task<Messages> GetAllMessages(Empty request, ServerCallContext context)
             {
-                return base.GetAllMessages(request, context);
+                var query = new GetAllUnityQuery();
+
+                var result = _mediator.Send(query).Result;
+
+                var messageDTOS = new Messages();
+
+                messageDTOS.Items.AddRange(result.Select(m=>_mapper.Map<MessageDTO>(request)));
+
+                return Task.FromResult(messageDTOS);
             }
             public override Task<Empty> UpdateMessage(MessageDTO request, ServerCallContext context)
             {
-                return base.UpdateMessage(request, context);
+                var command = new UpdateMessageCommand(_mapper.Map<ModuleCentralizationIIoT.Domain.Entities.Message>(request));
+
+                _mediator.Send(command);
+
+                return Task.FromResult(new Empty());
             }
             public override Task<Empty> DeleteMessage(DeleteRequest request, ServerCallContext context)
             {
-                return base.DeleteMessage(request, context);
+                var command = new DeleteMessageCommand(new Guid(request.Id));
+
+                _mediator.Send(command);
+
+                return Task.FromResult(new Empty());
             }
         }
     }

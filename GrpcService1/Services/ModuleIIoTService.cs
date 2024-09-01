@@ -3,7 +3,11 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MediatR;
 using ModuleCentralizationIIoT.Application.ModuleCQRS.Commands.CreateModuleIIoT;
+using ModuleCentralizationIIoT.Application.ModuleCQRS.Commands.DeleteModuleIIoT;
+using ModuleCentralizationIIoT.Application.ModuleCQRS.Commands.UpdateModuleIIoT;
+using ModuleCentralizationIIoT.Application.ModuleCQRS.Queries.GetAllModuleIIoT;
 using ModuleCentralizationIIoT.Application.ModuleCQRS.Queries.GetModuleIIoTById;
+using ModuleCentralizationIIoT.Application.UnityCQRS.Commands.UpdateUnity;
 using ModuleCentralizationIIoT.Contracts;
 using ModuleCentralizationIIoT.GrpcProtos;
 using ModuleCentralizationIIoT.GrpcProtos.ModulesIIoT;
@@ -20,19 +24,16 @@ namespace GrpcService1.Services
             _mapper = mapper;
             _mediator = mediator;
         }
+        private readonly IModuleIIoTRepository _moduleIIoTRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ModuleIIoTService(IModuleIIoTRepository moduleIIoTRepository, IUnitOfWork unitOfWork)
+        {
+            _moduleIIoTRepository = moduleIIoTRepository;
+            _unitOfWork = unitOfWork;
+        }
         public override Task<ModuleIIoTDTO> CreateModuleIIoT(CreateModuleIIoTRequest request, ServerCallContext context)
         {
-
-            //var command = new CreateMotorcycleCommand(
-            //    request.Brand,
-            //    (EnergySource)request.EnergySources,
-            //    new Domain.ValueObjects.Price(
-            //        (MoneyType)request.Price.MoneyType,
-            //        request.Price.Value));
-
-            //var result = _mediator.Send(command).Result;
-
-            //return Task.FromResult(_mapper.Map<MotorcycleDTO>(result));
             var command = new CreateModuleIIoTCommand(
                 request.Name,
                 request.AddressIp);
@@ -43,14 +44,6 @@ namespace GrpcService1.Services
         }
         public override Task<NullableModuleIIoTDTO> GetModuleIIoT(GetRequest request, ServerCallContext context)
         {
-            //var query = new GetMotorcycleByIdQuery(new Guid(request.Id));
-
-            //var result = _mediator.Send(query).Result;
-
-            //if (result is null)
-            //    return Task.FromResult(new NullableMotorcycleDTO() { Null = NullValue.NullValue });
-            //return Task.FromResult(new NullableMotorcycleDTO() { Motorcycle = _mapper.Map<MotorcycleDTO>(result) });
-
             var query = new GetModuleIIoTByIdQuery(new Guid(request.Id));
 
             var result = _mediator.Send(query).Result;
@@ -61,24 +54,33 @@ namespace GrpcService1.Services
         }
         public override Task<ModulesIIoT> GetAllModuleIIoT(Empty request, ServerCallContext context)
         {
-            return base.GetAllModuleIIoT(request, context);
+            var query = new GetAllModuleIIoTQuery();
+
+            var result = _mediator.Send(query).Result;
+
+            var moduleIIoTDTOs = new ModulesIIoT();
+
+            moduleIIoTDTOs.Items.AddRange(result.Select(m => _mapper.Map<ModuleIIoTDTO>(request)));
+
+            return Task.FromResult(moduleIIoTDTOs);
         }
         public override Task<Empty> UpdateModuleIIoT(ModuleIIoTDTO request, ServerCallContext context)
         {
-            return base.UpdateModuleIIoT(request, context);
+            var command = new UpdateModuleIIoTCommand(_mapper.Map<ModuleCentralizationIIoT.Domain.Entities.ModuleIIoT>(request));
+
+            _mediator.Send(command);
+
+            return Task.FromResult(new Empty());
         }
         public override Task<Empty> DeleteModuleIIoT(DeleteRequest request, ServerCallContext context)
         {
-            return base.DeleteModuleIIoT(request, context);
+            var command = new DeleteModuleIIoTCommand(new Guid (request.Id));
+
+            _mediator.Send(command);
+
+            return Task.FromResult(new Empty());
         }
 
-        private readonly IModuleIIoTRepository _moduleIIoTRepository;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public ModuleIIoTService(IModuleIIoTRepository moduleIIoTRepository, IUnitOfWork unitOfWork)
-        {
-            _moduleIIoTRepository = moduleIIoTRepository;
-            _unitOfWork = unitOfWork;
-        }
     }
 }

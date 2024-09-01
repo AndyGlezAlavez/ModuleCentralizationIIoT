@@ -16,27 +16,32 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
     public class MessageTest
     {
         public IMessageRepository _messageRepository;
+        public IModuleIIoTRepository _moduleIIoTRepository;
         public IUnitOfWork _unitOfWork;
         
         public MessageTest()
         {
             ApplicationContext context =  new ApplicationContext(ConnectionStringProvider.GetConnectionString());
             _messageRepository= new MessageRepository(context);
+            _moduleIIoTRepository= new ModuleIIoTRepository(context);
             _unitOfWork= new UnitOfWork(context);
         }
 
-        [DataRow("Hellow World", "Modulo ZigBee", "192.168.140.0")]
-        [DataRow("Bye World"," Modulo LTE", "255.255.255.5")]
+        [DataRow("0","Hellow World", "Modulo ZigBee", "192.168.140.0")]
+        [DataRow("0","Bye World"," Modulo LTE", "255.255.255.5")]
 
         [TestMethod]
         public void Can_Add_Message(
+            int moduleIIoTposition,
             string text,
             string name,
             string addressIp)
         {
             //Arrange
+            ModuleIIoT? moduleIIoT= _moduleIIoTRepository.GetAllModuleIIoT().ElementAtOrDefault(moduleIIoTposition);
+            Assert.IsNotNull(moduleIIoT);
             Guid id = Guid.NewGuid();
-            Message message= new Message(text,new ModuleIIoT(name,addressIp));
+            Message message= new Message(id,text,moduleIIoT);
             message.Id = id;
 
             //Execute
@@ -80,6 +85,7 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
         [TestMethod]
         public void Can_Delete_Message(int position)
         {
+
             //Arrange
             var Messages = _messageRepository.GetAllMessage();
             Assert.IsNotNull(Messages);

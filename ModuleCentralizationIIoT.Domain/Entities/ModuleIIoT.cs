@@ -26,6 +26,12 @@ namespace ModuleCentralizationIIoT.Domain.Entities
 
         protected ModuleIIoT() { }
 
+        public void ChangesAccessPort(string accessPort)
+        {
+            if(accessPort.Length==0) return;
+            AccessPort = accessPort;
+        }
+
         public ModuleIIoT(Guid id, string name, string addressIp) : base(id) 
         {
             Name = name;

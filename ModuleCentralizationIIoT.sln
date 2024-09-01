@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.DataAccess", "ModuleCentralizationIIoT.DataAccess\ModuleCentralizationIIoT.DataAccess.csproj", "{C8372A41-E032-48C0-93D3-45D92778AE1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.ConsoleApp", "ModuleCentralization IIoT.ConsoleApp\ModuleCentralizationIIoT.ConsoleApp.csproj", "{41D348D6-0CC9-46C4-B3C2-246827EC4531}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.Contracts", "ModuleCentralizationIIoT.Contracts\ModuleCentralizationIIoT.Contracts.csproj", "{5546965C-4E1C-4A6E-848C-5A64706B110C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.DataAccess.Test", "ModuleCentralizationIIoT.DataAccess.Test\ModuleCentralizationIIoT.DataAccess.Test.csproj", "{C4AFF988-E9D5-41FF-B263-03A54A529331}"
@@ -20,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.Gr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcService1", "GrpcService1\GrpcService1.csproj", "{714D9925-60DC-4630-AB1A-AC2AB178478A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleCentralizationIIoT.Application", "ModuleCentralizationIIoT.Application\ModuleCentralizationIIoT.Application.csproj", "{133348AD-BE1D-41B8-AFAA-AACDCC91E98E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleCentralizationIIoT.Application", "ModuleCentralizationIIoT.Application\ModuleCentralizationIIoT.Application.csproj", "{133348AD-BE1D-41B8-AFAA-AACDCC91E98E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleCentralizationIIoT.ConsoleApp", "ModuleCentralizationIIoT.ConsoleApp\ModuleCentralizationIIoT.ConsoleApp.csproj", "{D996F4F8-05FE-49EE-B9F5-4BD90C63F6F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +36,6 @@ Global
 		{C8372A41-E032-48C0-93D3-45D92778AE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8372A41-E032-48C0-93D3-45D92778AE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8372A41-E032-48C0-93D3-45D92778AE1E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41D348D6-0CC9-46C4-B3C2-246827EC4531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41D348D6-0CC9-46C4-B3C2-246827EC4531}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41D348D6-0CC9-46C4-B3C2-246827EC4531}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41D348D6-0CC9-46C4-B3C2-246827EC4531}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5546965C-4E1C-4A6E-848C-5A64706B110C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5546965C-4E1C-4A6E-848C-5A64706B110C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5546965C-4E1C-4A6E-848C-5A64706B110C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,6 +56,10 @@ Global
 		{133348AD-BE1D-41B8-AFAA-AACDCC91E98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{133348AD-BE1D-41B8-AFAA-AACDCC91E98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{133348AD-BE1D-41B8-AFAA-AACDCC91E98E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D996F4F8-05FE-49EE-B9F5-4BD90C63F6F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D996F4F8-05FE-49EE-B9F5-4BD90C63F6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D996F4F8-05FE-49EE-B9F5-4BD90C63F6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D996F4F8-05FE-49EE-B9F5-4BD90C63F6F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

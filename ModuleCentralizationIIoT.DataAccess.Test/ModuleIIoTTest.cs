@@ -33,7 +33,7 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
         {
             //Arrange
             Guid id = Guid.NewGuid();
-            ModuleIIoT moduleIIoT = new ModuleIIoT(name, addressIp);
+            ModuleIIoT moduleIIoT = new ModuleIIoT(id,name, addressIp);
             moduleIIoT.Id = id;
 
             //Execute

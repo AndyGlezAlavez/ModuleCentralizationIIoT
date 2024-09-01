@@ -46,13 +46,6 @@ namespace ModuleCentralizationIIoT.DataAccess.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
-            #region Mapping
-  
-            modelBuilder.Entity<ModuleIIoT>().ToTable("ModuleIIoT");
-            modelBuilder.Entity<Unity>().ToTable("Unity");
-            modelBuilder.Entity<Message>().ToTable("Message");
-            #endregion
-
             modelBuilder.ApplyConfiguration(new MessageEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new UnityEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ModuleIIoTEntittyTypeConfiguration());
