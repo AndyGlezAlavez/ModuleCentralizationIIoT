@@ -15,7 +15,7 @@ namespace GrpcService1.Mappers
                 {
                     Id = s.ModuleIIoT.Id.ToString(),
                     Name = s.ModuleIIoT.Name,
-                    AddressIp = s.ModuleIIoT.AddressIp,
+                    AddressIp = s.ModuleIIoT.AddresIp,
 
                 }))
                 .ForMember(t=>t.CreationMessage,o=>o.MapFrom(s=>s.CreationMessage));

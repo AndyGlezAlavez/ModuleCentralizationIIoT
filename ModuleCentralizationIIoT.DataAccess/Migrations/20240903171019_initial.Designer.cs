@@ -11,7 +11,7 @@ using ModuleCentralizationIIoT.DataAccess.Contexts;
 namespace ModuleCentralizationIIoT.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240727190740_initial")]
+    [Migration("20240903171019_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

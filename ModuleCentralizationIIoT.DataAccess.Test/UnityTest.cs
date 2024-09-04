@@ -32,7 +32,7 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
         {
             //Arrange
             Guid id = Guid.NewGuid();
-            Unity unity= new Unity(id, code, name);
+            Unity unity= new Unity(id,code, name);
             unity.Id = id;
 
             //Execute

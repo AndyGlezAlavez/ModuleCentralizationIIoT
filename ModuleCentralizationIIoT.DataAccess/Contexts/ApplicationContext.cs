@@ -14,7 +14,7 @@ namespace ModuleCentralizationIIoT.DataAccess.Contexts
     public class ApplicationContext: DbContext
     {
         #region Tables
-        public DbSet<ModuleIIoT> ModuleIIoTs { get; set; }
+        public DbSet<ModuleIIoT> ModuleIIoTs { get; set; }        
         public DbSet<Unity> Unities { get; set; }
         public DbSet<Message> Messages { get; set; }
         #endregion

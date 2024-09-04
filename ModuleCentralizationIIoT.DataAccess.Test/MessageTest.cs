@@ -27,8 +27,8 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             _unitOfWork= new UnitOfWork(context);
         }
 
-        [DataRow("0","Hellow World", "Modulo ZigBee", "192.168.140.0")]
-        [DataRow("0","Bye World"," Modulo LTE", "255.255.255.5")]
+        [DataRow(0,"Hellow World", "Modulo ZigBee", "192.168.140.0")]
+        [DataRow(0,"Bye World"," Modulo LTE", "255.255.255.5")]
 
         [TestMethod]
         public void Can_Add_Message(

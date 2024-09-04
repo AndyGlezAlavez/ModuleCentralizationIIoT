@@ -4,6 +4,7 @@ using ModuleCentralizationIIoT.DataAccess;
 using ModuleCentralizationIIoT.DataAccess.Contexts;
 using ModuleCentralizationIIoT.DataAccess.Repositories;
 using System.Reflection.Metadata;
+using MediatR;
 
 
 
@@ -19,7 +20,11 @@ namespace GrpcService1
             // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
 
             // Add services to the container.
-            builder.Services.AddGrpc();
+            builder.Services.AddGrpc(options => { options.EnableDetailedErrors = true;
+                options.MaxReceiveMessageSize = 2 * 1024 * 1024;//2mb
+                options.MaxSendMessageSize = 5 * 1024 * 1024;
+            });
+
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             builder.Services.AddMediatR(new MediatRServiceConfiguration()
             {

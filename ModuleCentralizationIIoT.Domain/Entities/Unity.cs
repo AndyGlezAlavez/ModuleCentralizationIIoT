@@ -18,7 +18,7 @@ namespace ModuleCentralizationIIoT.Domain.Entities
         #endregion
 
         protected Unity() { }
-        public Unity(Guid id,string code, string name) : base(id)
+        public Unity(Guid id,string code, string name) : base(id) 
         {
             Code = code;
             Name = name;

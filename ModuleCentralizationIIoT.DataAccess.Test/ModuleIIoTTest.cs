@@ -29,11 +29,11 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
 
         public void Can_Add_ModuleIIoT(
             string name,
-            string addressIp)
+            string addresIp)
         {
             //Arrange
             Guid id = Guid.NewGuid();
-            ModuleIIoT moduleIIoT = new ModuleIIoT(id,name, addressIp);
+            ModuleIIoT moduleIIoT = new ModuleIIoT(id ,name, addresIp);
             moduleIIoT.Id = id;
 
             //Execute
