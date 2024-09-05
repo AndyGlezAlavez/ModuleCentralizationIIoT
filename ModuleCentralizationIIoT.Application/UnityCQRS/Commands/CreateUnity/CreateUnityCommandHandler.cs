@@ -14,7 +14,7 @@ namespace ModuleCentralizationIIoT.Application.UnityCQRS.Commands.CreateUnity
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUnityRepository _unityrepository;
 
-        CreateUnityCommandHandler(IUnitOfWork unitOfWork, IUnityRepository unityrepository)
+        public CreateUnityCommandHandler(IUnitOfWork unitOfWork, IUnityRepository unityrepository)
         {
             _unitOfWork = unitOfWork;
             _unityrepository = unityrepository;
@@ -26,8 +26,10 @@ namespace ModuleCentralizationIIoT.Application.UnityCQRS.Commands.CreateUnity
                 Guid.NewGuid(),
                 request.code,
                 request.name);
+
             _unityrepository.AddUnity(result);
             _unitOfWork.SaveChages();
+             
             return Task.FromResult(result);
             
         }

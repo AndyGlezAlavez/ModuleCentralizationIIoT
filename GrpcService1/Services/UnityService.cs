@@ -27,14 +27,7 @@ namespace GrpcService1.Services
             _mapper = mapper;
         }
 
-        private readonly IUnityRepository _repository;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public UnityService(IUnityRepository repository, IUnitOfWork unitOfWork)
-        {
-            _repository = repository;
-            _unitOfWork = unitOfWork;
-        }
 
         public override Task<UnityDTO> CreateUnity(CreateUnityRequest request, ServerCallContext context)
         {

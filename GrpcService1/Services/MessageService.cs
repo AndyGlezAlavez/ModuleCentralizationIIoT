@@ -4,86 +4,74 @@ using Grpc.Core;
 using MediatR;
 using ModuleCentralizationIIoT.GrpcProtos.Message;
 using ModuleCentralizationIIoT.GrpcProtos;
-using ModuleCentralizationIIoT.Contracts;
 using ModuleCentralizationIIoT.Application.MessageCQRS.Commands.CreateMessage;
 using ModuleCentralizationIIoT.Application.MessageCQRS.Commands.DeleteMessage;
-using ModuleCentralizationIIoT.Application.UnityCQRS.Commands.UpdateUnity;
 using ModuleCentralizationIIoT.Application.UnityCQRS.Queries.GetAllUnity;
-using ModuleCentralizationIIoT.GrpcProtos.Unity;
 using ModuleCentralizationIIoT.Application.UnityCQRS.Queries.GetUnityById;
 using ModuleCentralizationIIoT.Application.MessageCQRS.Commands.UpdateMessage;
 
 namespace GrpcService1.Services
 {
-    public class MessageService
+    
+    public class MessageService : Message.MessageBase
     {
-        public class MesageServvice : Message.MessageBase
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+
+        public MessageService(IMediator mediator, IMapper mapper)
         {
-            private readonly IMediator _mediator;
-            private readonly IMapper _mapper;
+            _mediator = mediator;
+            _mapper = mapper;
+        }
 
-            public MesageServvice(IMediator mediator, IMapper mapper)
-            {
-                _mediator = mediator;
-                _mapper = mapper;
-            }
+        public override Task<MessageDTO> CreateMessage(CreateMessageRequest request, ServerCallContext context)
+        {
+            var command = new CreateMessageCommand(
+                request.Text,
+                _mapper.Map<ModuleCentralizationIIoT.Domain.Entities.ModuleIIoT>(request.ModuleIIoT));
 
-            private readonly IMessageRepository _messageRepository;
-            private readonly IUnitOfWork _unitOfWork;
+            var result = _mediator.Send(command).Result;
+            result.CreationMessage = DateTime.SpecifyKind(result.CreationMessage, DateTimeKind.Local).ToUniversalTime();
+            return Task.FromResult(_mapper.Map<MessageDTO>(result));
+        }
+        public override Task<NullableMessageDTO> GetMessage(GetRequest request, ServerCallContext context)
+        {
+            var query = new GetUnityByIdQuery(new Guid(request.Id));
 
-            public MesageServvice(IMessageRepository messageRepository, IUnitOfWork unitOfWork)
-            {
-                _messageRepository = messageRepository;
-                _unitOfWork = unitOfWork;
-            }
-            public override Task<MessageDTO> CreateMessage(CreateMessageRequest request, ServerCallContext context)
-            {
-                var command = new CreateMessageCommand(
-                    request.Text,
-                   _mapper.Map<ModuleCentralizationIIoT.Domain.Entities.ModuleIIoT>(request.ModuleIIoT));
+            var result = _mediator.Send(query).Result;
 
-                var result = _mediator.Send(command).Result;
+            if (result == null) 
+                return Task.FromResult(new NullableMessageDTO() { Message = _mapper.Map<MessageDTO>(result) });
+            return Task.FromResult(new NullableMessageDTO() { Message= _mapper.Map<MessageDTO>(result) }) ;
+        }
+        public override Task<Messages> GetAllMessages(Empty request, ServerCallContext context)
+        {
+            var query = new GetAllUnityQuery();
 
-                return Task.FromResult(_mapper.Map<MessageDTO>(result));
-            }
-            public override Task<NullableMessageDTO> GetMessage(GetRequest request, ServerCallContext context)
-            {
-                var query = new GetUnityByIdQuery(new Guid(request.Id));
+            var result = _mediator.Send(query).Result;
 
-                var result = _mediator.Send(query).Result;
+            var messageDTOS = new Messages();
 
-                if (result == null) 
-                    return Task.FromResult(new NullableMessageDTO() { Message = _mapper.Map<MessageDTO>(result) });
-                return Task.FromResult(new NullableMessageDTO() { Message= _mapper.Map<MessageDTO>(result) }) ;
-            }
-            public override Task<Messages> GetAllMessages(Empty request, ServerCallContext context)
-            {
-                var query = new GetAllUnityQuery();
+            messageDTOS.Items.AddRange(result.Select(m=>_mapper.Map<MessageDTO>(request)));
 
-                var result = _mediator.Send(query).Result;
+            return Task.FromResult(messageDTOS);
+        }
+        public override Task<Empty> UpdateMessage(MessageDTO request, ServerCallContext context)
+        {
+            var command = new UpdateMessageCommand(_mapper.Map<ModuleCentralizationIIoT.Domain.Entities.Message>(request));
 
-                var messageDTOS = new Messages();
+            _mediator.Send(command);
 
-                messageDTOS.Items.AddRange(result.Select(m=>_mapper.Map<MessageDTO>(request)));
+            return Task.FromResult(new Empty());
+        }
+        public override Task<Empty> DeleteMessage(DeleteRequest request, ServerCallContext context)
+        {
+            var command = new DeleteMessageCommand(new Guid(request.Id));
 
-                return Task.FromResult(messageDTOS);
-            }
-            public override Task<Empty> UpdateMessage(MessageDTO request, ServerCallContext context)
-            {
-                var command = new UpdateMessageCommand(_mapper.Map<ModuleCentralizationIIoT.Domain.Entities.Message>(request));
+            _mediator.Send(command);
 
-                _mediator.Send(command);
-
-                return Task.FromResult(new Empty());
-            }
-            public override Task<Empty> DeleteMessage(DeleteRequest request, ServerCallContext context)
-            {
-                var command = new DeleteMessageCommand(new Guid(request.Id));
-
-                _mediator.Send(command);
-
-                return Task.FromResult(new Empty());
-            }
+            return Task.FromResult(new Empty());
         }
     }
+    
 }

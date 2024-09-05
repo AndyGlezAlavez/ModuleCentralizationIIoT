@@ -13,7 +13,7 @@ namespace ModuleCentralizationIIoT.Application.UnityCQRS.Commands.UpdateUnity
         private readonly IUnityRepository _unityRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        UpdateUnityCommandHandler(IUnityRepository unityRepository, IUnitOfWork unitOfWork)
+        public UpdateUnityCommandHandler(IUnityRepository unityRepository, IUnitOfWork unitOfWork)
         {
             _unityRepository = unityRepository;
             _unitOfWork = unitOfWork;

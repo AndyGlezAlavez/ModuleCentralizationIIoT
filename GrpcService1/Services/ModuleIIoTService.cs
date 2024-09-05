@@ -24,14 +24,7 @@ namespace GrpcService1.Services
             _mapper = mapper;
             _mediator = mediator;
         }
-        private readonly IModuleIIoTRepository _moduleIIoTRepository;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public ModuleIIoTService(IModuleIIoTRepository moduleIIoTRepository, IUnitOfWork unitOfWork)
-        {
-            _moduleIIoTRepository = moduleIIoTRepository;
-            _unitOfWork = unitOfWork;
-        }
         public override Task<ModuleIIoTDTO> CreateModuleIIoT(CreateModuleIIoTRequest request, ServerCallContext context)
         {
             var command = new CreateModuleIIoTCommand(

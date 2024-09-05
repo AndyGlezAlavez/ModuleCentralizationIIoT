@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ModuleCentralizationIIoT.Domain;
+using ModuleCentralizationIIoT.GrpcProtos;
 
 namespace GrpcService1.Mappers
 {
@@ -6,8 +8,8 @@ namespace GrpcService1.Mappers
     {
         public UnityProfile()
         {
-            CreateMap<ModuleCentralizationIIoT.Domain.Entities.Unity,
-                ModuleCentralizationIIoT.GrpcProtos.Unity.UnityDTO>()
+            CreateMap<ModuleCentralizationIIoT.Domain.Entities.Unity ,
+            ModuleCentralizationIIoT.GrpcProtos.Unity.UnityDTO>()
                 .ForMember(t => t.Id, o => o.MapFrom(s => s.Id.ToString()))
                 .ForMember(t => t.Area, o => o.MapFrom(s => s.Area))
                 .ForMember(t => t.Name, o => o.MapFrom((s) => s.Name))

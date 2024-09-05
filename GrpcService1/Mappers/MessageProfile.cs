@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Google.Protobuf.WellKnownTypes;
 
 
 namespace GrpcService1.Mappers
@@ -11,23 +12,19 @@ namespace GrpcService1.Mappers
                 ModuleCentralizationIIoT.GrpcProtos.Message.MessageDTO>()
                 .ForMember(t => t.Id, o => o.MapFrom(s => s.Id.ToString()))
                 .ForMember(t => t.Text, o => o.MapFrom(s => s.Text))
-                .ForMember(t => t.ModuleIIoT, o => o.MapFrom(s => new ModuleCentralizationIIoT.GrpcProtos.ModulesIIoT.ModuleIIoTDTO()
-                {
-                    Id = s.ModuleIIoT.Id.ToString(),
-                    Name = s.ModuleIIoT.Name,
-                    AddressIp = s.ModuleIIoT.AddresIp,
+                .ForMember(t => t.Priority, o => o.MapFrom(s => (ModuleCentralizationIIoT.GrpcProtos.Priority)s.Priority))
+                .ForMember(t => t.ModuleIIoT, o => o.MapFrom(s => s.ModuleIIoT))
+                .ForMember(t=>t.CreationMessage,o=>o.MapFrom(s=>Timestamp.FromDateTime(s.CreationMessage)))
+                 ;
 
-                }))
-                .ForMember(t=>t.CreationMessage,o=>o.MapFrom(s=>s.CreationMessage));
             CreateMap<ModuleCentralizationIIoT.GrpcProtos.Message.MessageDTO,
                 ModuleCentralizationIIoT.Domain.Entities.Message>()
                 .ForMember(t=>t.Id, o =>o.MapFrom(s=>new Guid(s.Id)))
                 .ForMember(t=>t.Text,o=>o.MapFrom(s=>s.Text))
-                .ForMember(t=>t.ModuleIIoT,o=>o.MapFrom(s=> new ModuleCentralizationIIoT.Domain.Entities.ModuleIIoT(
-                    new Guid(s.ModuleIIoT.Id),
-                    s.ModuleIIoT.Name,
-                    s.ModuleIIoT.AddressIp)))
-                .ForMember(t=>t.CreationMessage,o=>o.MapFrom(s=>s.CreationMessage));
+                .ForMember(t=>t.Priority,o=>o.MapFrom(s=>(ModuleCentralizationIIoT.Domain.Entities.Types.Priority)s.Priority))
+                .ForMember(t=>t.ModuleIIoT,o=>o.MapFrom(s=> s.ModuleIIoT))
+                .ForMember(t=>t.CreationMessage,o=>o.MapFrom(s=>s.CreationMessage.ToDateTime()))
+                ;
         }
     }
 }

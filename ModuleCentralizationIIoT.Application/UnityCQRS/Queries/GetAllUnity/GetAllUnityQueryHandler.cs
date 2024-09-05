@@ -12,7 +12,7 @@ namespace ModuleCentralizationIIoT.Application.UnityCQRS.Queries.GetAllUnity
     public class GetAllUnityQueryHandler : IQueryHandler<GetAllUnityQuery, IEnumerable<Unity>>
     {
         private readonly IUnityRepository _unityRepository;
-        GetAllUnityQueryHandler(IUnityRepository unityRepository)
+        public GetAllUnityQueryHandler(IUnityRepository unityRepository)
         {
             _unityRepository = unityRepository;
         }

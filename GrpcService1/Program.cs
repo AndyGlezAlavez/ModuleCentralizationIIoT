@@ -3,8 +3,7 @@ using ModuleCentralizationIIoT.Contracts;
 using ModuleCentralizationIIoT.DataAccess;
 using ModuleCentralizationIIoT.DataAccess.Contexts;
 using ModuleCentralizationIIoT.DataAccess.Repositories;
-using System.Reflection.Metadata;
-using MediatR;
+using ModuleCentralizationIIoT.Application;
 
 
 
@@ -48,7 +47,8 @@ namespace GrpcService1
             app.MapGrpcService<MessageService>();
             app.MapGrpcService<UnityService>();
 
-            app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+            app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client." +
+            " To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
             app.Run();
         }

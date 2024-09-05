@@ -39,11 +39,11 @@ message MessageDTO{
 	string text=2;
     google.protobuf.Timestamp creationMessage = 3;
 	ModuleIIoTDTO moduleIIoT=4;
+	Priority priority=5;
 }
 
 message CreateMessageRequest{
 		string text=1;
 		ModuleIIoTDTO moduleIIoT=2;
-		google.protobuf.Timestamp creationMessage = 3;
 
 	}

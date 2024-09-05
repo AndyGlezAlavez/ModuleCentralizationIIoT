@@ -17,7 +17,7 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             Console.WriteLine("Creating channel and client");
             var httpHandler = new HttpClientHandler();
             httpHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            var channel = GrpcChannel.ForAddress("http://localhost:5088", new GrpcChannelOptions { HttpHandler = httpHandler });
+            var channel = GrpcChannel.ForAddress("http://localhost:7200", new GrpcChannelOptions { HttpHandler = httpHandler });
 
             if (channel is null)
             {
@@ -30,43 +30,51 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             var MessageClient = new Message.MessageClient(channel);
             var UnityClient = new Unity.UnityClient(channel);
 
-            bool cicle = true;
-            string OptionSelect = "";
-            string DateTypeSelect = "";
+            //bool cicle = true;
+            //string OptionSelect = "";
+            //string DateTypeSelect = "";
 
 
             //MODULOOOOOO
-                //Console.WriteLine("Presione una tecla para Crear el modulo");
-                //Console.ReadKey();
-                //var createResponse = ModuleClient.CreateModuleIIoT(new CreateModuleIIoTRequest()
-                //{
-                //    Name = "Module ZigBee",
-                //    AddressIp = "192.168.156.0",
-                //}
-                //);
+            Console.WriteLine("Presione una tecla para Crear el modulo");
+            Console.ReadKey();
+            var createResponse = ModuleClient.CreateModuleIIoT(new CreateModuleIIoTRequest()
+            {
+                Name = "Module ZigBee",
+                AddressIp = "192.168.156.0",
+            }
+            );
 
-                //if (createResponse is null)
-                //{
-                //    Console.WriteLine("Cannot create ModuleIIoT");
-                //    channel.Dispose();
-                //    return;
-                //}
-                //else
-                //{
-                //    Console.WriteLine($"Creación exitosa.");
-                //}
+            if (createResponse is null)
+            {
+                Console.WriteLine("Cannot create ModuleIIoT");
+                channel.Dispose();
+                return;
+            }
+            else
+            {
+                Console.WriteLine($"Creación exitosa.");
+            }
 
             //MENSAGEEEEEEEE
-            //var createResponse1 = MessageClient.CreateMessage(new CreateMessageRequest()
-            //{
-            //    Text = "Hello",
-            //    ModuleIIoT = new ModuleIIoT()
-            //    {
-            //        Name = "Module ZigBee",
-            //        AddressIp = "192.168.156.0",
-            //    }
+            Console.WriteLine("Presione una tecla para Crear el message");
+            Console.ReadKey();
+            var createResponse1 = MessageClient.CreateMessage(new CreateMessageRequest()
+            {
+                Text = "Hello",
+                ModuleIIoT = createResponse
 
-            //});
+            });
+            if (createResponse is null)
+            {
+                Console.WriteLine("Cannot create message");
+                channel.Dispose();
+                return;
+            }
+            else
+            {
+                Console.WriteLine($"Creación exitosa.");
+            }
 
             //UNIDADDDDDDDDDD
 
@@ -76,8 +84,7 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             var createResponse2 = UnityClient.CreateUnity(new CreateUnityRequest()
             {
                 Code = "1234",
-                Name= "unity",
-                Area="home"
+                Name = "unity"
 
             });
             if (createResponse2 is null)
@@ -90,24 +97,24 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             {
                 Console.WriteLine($"Creación exitosa.");
             }
-            //Console.WriteLine($"Presione una tecla para obtener el modulo con Id {createResponse.Id}");
-            //    Console.ReadKey();
-            //    var getByIdResponse = ModuleClient.GetModuleIIoT(new GetRequest() { Id = createResponse.Id.ToString() });
-            //    if (getByIdResponse is null)
-            //    {
-            //        Console.WriteLine("Cannot get Module");
-            //        channel.Dispose();
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine($"Obtención exitosa de los modulos {getByIdResponse.ModuleIIoT.Name}");
-            //    }
+            Console.WriteLine($"Presione una tecla para obtener el modulo con Id {createResponse.Id}");
+            Console.ReadKey();
+            var getByIdResponse = ModuleClient.GetModuleIIoT(new GetRequest() { Id = createResponse.Id.ToString() });
+            if (getByIdResponse is null)
+            {
+                Console.WriteLine("Cannot get Module");
+                channel.Dispose();
+                return;
+            }
+            else
+            {
+                Console.WriteLine($"Obtención exitosa de los modulos {getByIdResponse.ModuleIIoT.Name}");
+            }
             //Console.WriteLine($"Presione una tecla para obtener el Message con Id {createResponse1.Id}");
             //Console.ReadKey();
             Console.WriteLine($"Presione una tecla para obtener el unity con Id {createResponse2.Id}");
             Console.ReadKey();
-            var getByIdResponse2 = UnityClient.GetUnity(new GetRequest() { Id= createResponse2.Id.ToString() });
+            var getByIdResponse2 = UnityClient.GetUnity(new GetRequest() { Id = createResponse2.Id.ToString() });
             if (getByIdResponse2 is null)
             {
                 Console.WriteLine("Cannot get Uinty");
@@ -121,17 +128,17 @@ namespace ModuleCentralizationIIoT.ConsoleApp
 
             //MODULOOOOOOOOO
 
-            //Console.WriteLine("Presione una tecla para modificar el modulo");
-            //Console.ReadKey();
-            //createResponse.IsConnected = true;
-            //ModuleClient.UpdateModuleIIoT(createResponse);
-            //var updateResponse = ModuleClient.GetModuleIIoT(new GetRequest() { Id = createResponse.Id });
-            //if (updateResponse is not null && 
-            //     updateResponse.KindCase== NullableModuleIIoTDTO.KindOneofCase.ModuleIIoT &&
-            //     updateResponse.ModuleIIoT.IsConnected == createResponse.IsConnected)
-            //{
-            //    Console.WriteLine($"modificacion exitosa");
-            //}
+            Console.WriteLine("Presione una tecla para modificar el modulo");
+            Console.ReadKey();
+            createResponse.IsConnected = true;
+            ModuleClient.UpdateModuleIIoT(createResponse);
+            var updateResponse = ModuleClient.GetModuleIIoT(new GetRequest() { Id = createResponse.Id });
+            if (updateResponse is not null &&
+                 updateResponse.KindCase == NullableModuleIIoTDTO.KindOneofCase.ModuleIIoT &&
+                 updateResponse.ModuleIIoT.IsConnected == createResponse.IsConnected)
+            {
+                Console.WriteLine($"modificacion exitosa");
+            }
 
             //MENSAGEEEEEEE
             //Console.WriteLine("Presione una tecla para modificar el modulo");
@@ -154,7 +161,7 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             Console.ReadKey();
             createResponse2.Area = "prueba";
             UnityClient.UpdateUnity(createResponse2);
-            var updateResponse2 = UnityClient.GetUnity(new GetRequest() { Id=createResponse2.Id });
+            var updateResponse2 = UnityClient.GetUnity(new GetRequest() { Id = createResponse2.Id });
             if (updateResponse2 is not null &&
                 updateResponse2.KindCase == NullableUnityDTO.KindOneofCase.Unity &&
                 updateResponse2.Unity.Area == createResponse2.Area)
@@ -164,15 +171,15 @@ namespace ModuleCentralizationIIoT.ConsoleApp
 
             //MODULOOOOOOOO
 
-            //Console.WriteLine("Presione una tecla para eliminar el modulo");
-            //Console.ReadKey();
+            Console.WriteLine("Presione una tecla para eliminar el modulo");
+            Console.ReadKey();
 
-            //ModuleClient.DeleteModuleIIoT(new DeleteRequest() { Id = createResponse.Id });
-            //var deleteGetResponse = ModuleClient.GetModuleIIoT((new GetRequest() { Id = createResponse.Id }));
-            //if (deleteGetResponse is null || deleteGetResponse.KindCase != NullableModuleIIoTDTO.KindOneofCase.ModuleIIoT)
-            //{
-            //    Console.WriteLine($"Eliminación exitosa.");
-            //}
+            ModuleClient.DeleteModuleIIoT(new DeleteRequest() { Id = createResponse.Id });
+            var deleteGetResponse = ModuleClient.GetModuleIIoT((new GetRequest() { Id = createResponse.Id }));
+            if (deleteGetResponse is null || deleteGetResponse.KindCase != NullableModuleIIoTDTO.KindOneofCase.ModuleIIoT)
+            {
+                Console.WriteLine($"Eliminación exitosa.");
+            }
 
             //MENSAGEEEEEEEE
             //Console.WriteLine("Presione una tecla para eliminar el mensaje");

@@ -34,8 +34,6 @@ message NullableModuleIIoTDTO{
 message CreateModuleIIoTRequest{
 	string name=1;
 	string addressIp=2;
-	bool isConnected=3;
-	//string accessport=4;
 }
 message ModuleIIoTDTO{
 	string id=1;

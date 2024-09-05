@@ -38,6 +38,5 @@ message NullableUnityDTO{
 message CreateUnityRequest{
 	string code=1;
 	string name=2;
-	string area=3;
 
 }

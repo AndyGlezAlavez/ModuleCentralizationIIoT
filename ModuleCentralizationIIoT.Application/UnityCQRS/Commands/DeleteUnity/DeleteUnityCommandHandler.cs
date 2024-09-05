@@ -14,7 +14,7 @@ namespace ModuleCentralizationIIoT.Application.UnityCQRS.Commands.DeleteUnity
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUnityRepository _unityrepository;
 
-        DeleteUnityCommandHandler(IUnitOfWork unitOfWork, IUnityRepository unityrepository)
+        public DeleteUnityCommandHandler(IUnitOfWork unitOfWork, IUnityRepository unityrepository)
         {
             _unitOfWork = unitOfWork;
             _unityrepository = unityrepository;

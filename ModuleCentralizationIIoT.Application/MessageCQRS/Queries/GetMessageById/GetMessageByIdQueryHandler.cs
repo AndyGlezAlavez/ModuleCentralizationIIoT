@@ -12,7 +12,7 @@ namespace ModuleCentralizationIIoT.Application.MessageCQRS.Queries.GetMessageByI
     public class GetMessageByIdQueryHandler : IQueryHandler<GetMessageByIdQuery, Message?>
     {
         private readonly IMessageRepository _messageRepository;
-        GetMessageByIdQueryHandler(IMessageRepository messageRepository) 
+        public GetMessageByIdQueryHandler(IMessageRepository messageRepository) 
         {
             _messageRepository = messageRepository;
         }
