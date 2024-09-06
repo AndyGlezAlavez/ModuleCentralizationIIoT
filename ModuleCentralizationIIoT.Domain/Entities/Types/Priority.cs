@@ -6,11 +6,25 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.Domain.Entities.Types
 { 
-
+    
+    /// <summary>
+    /// Prioridad de un mensaje.
+    /// </summary>
     public enum Priority
     {
-        Low,
+        /// <summary>
+        /// Baja
+        /// </summary>
+        Low, 
+
+        /// <summary>
+        /// Media
+        /// </summary>
         Medium,
+
+        /// <summary>
+        /// Alta
+        /// </summary>
         High,
     }
 }

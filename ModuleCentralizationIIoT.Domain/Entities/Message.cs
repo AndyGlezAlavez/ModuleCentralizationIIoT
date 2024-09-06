@@ -8,19 +8,51 @@ using System.Threading.Tasks;
 
 namespace ModuleCentralizationIIoT.Domain.Entities
 {
+    
+    /// <summary>
+    /// Modela un mensaje.
+    /// </summary>
     public class Message :Entity
     {
-        #region Prorperties
+        #region Properties
+
+        /// <summary>
+        /// Texto del mensaje.
+        /// </summary>
         public string Text { get; set; }
+
+        /// <summary>
+        /// Fecha y hora del mensaje
+        /// </summary>
         public DateTime CreationMessage { get; set; }
+
+        /// <summary>
+        /// Prioridad del mensaje.
+        /// </summary>
         public Priority Priority { get; set; }
-        //relacion con su modulo correspondiente
+
+        /// <summary>
+        /// Relación del mensaje con su módulo correspondiente
+        /// </summary>
         public Guid? ModuleIIoTId {  get; set; }
+
+        /// <summary>
+        /// Módulo IIoT de donde se genera el mensaje.
+        /// </summary>
         public ModuleIIoT ModuleIIoT{ get; set; }
         #endregion
 
+        /// <summary>
+        /// Requerido por EntityFrameworkCore para migraciones.
+        /// </summary>
         protected Message() { }
 
+        /// <summary>
+        /// Inicializa una mensaje. <see cref="Message"/>
+        /// </summary>
+        /// <param name="id">Identificador de la entidad.</param>
+        /// <param name="text">Texto del mensaje.</param>
+        /// <param name="moduleIIoT">Módulo IIoT de donde se genera el mensaje.</param>
         public Message(Guid id ,string text, ModuleIIoT moduleIIoT) : base(id)
         {
             Text = text;

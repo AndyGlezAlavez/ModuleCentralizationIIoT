@@ -11,14 +11,17 @@ namespace ModuleCentralizationIIoT.ConsoleApp
     {
         static void Main(string[] args)
         {
+            //Inicio del programa
             Console.WriteLine("Presione una tecla para conectar");
             Console.ReadKey();
-
+            
+            //Creando un canal y un cliente
             Console.WriteLine("Creating channel and client");
             var httpHandler = new HttpClientHandler();
             httpHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
             var channel = GrpcChannel.ForAddress("http://localhost:7200", new GrpcChannelOptions { HttpHandler = httpHandler });
 
+            //Error en la creación del canal, retorno
             if (channel is null)
             {
                 Console.WriteLine("Cannot connect");
@@ -35,6 +38,8 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             //string DateTypeSelect = "";
 
 
+
+
             //MODULOOOOOO
             Console.WriteLine("Presione una tecla para Crear el modulo");
             Console.ReadKey();
@@ -45,16 +50,21 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             }
             );
 
+            //Fallo en la creación del módulo, retorno
             if (createResponse is null)
             {
                 Console.WriteLine("Cannot create ModuleIIoT");
                 channel.Dispose();
                 return;
             }
+            
+            //Módulo creado
             else
             {
                 Console.WriteLine($"Creación exitosa.");
             }
+
+
 
             //MENSAGEEEEEEEE
             Console.WriteLine("Presione una tecla para Crear el message");
@@ -65,19 +75,25 @@ namespace ModuleCentralizationIIoT.ConsoleApp
                 ModuleIIoT = createResponse
 
             });
+
+            //Fallo en la creación del mensaje, retorno.
             if (createResponse is null)
             {
                 Console.WriteLine("Cannot create message");
                 channel.Dispose();
                 return;
             }
+
+            //Mensaje creado
             else
             {
                 Console.WriteLine($"Creación exitosa.");
             }
 
-            //UNIDADDDDDDDDDD
 
+
+
+            //UNIDADDDDDDDDDD
             Console.WriteLine("Presione una tecla para Crear la unidad");
             Console.ReadKey();
 
@@ -87,50 +103,71 @@ namespace ModuleCentralizationIIoT.ConsoleApp
                 Name = "unity"
 
             });
+
+            //Fallo en la creación de la unidad, retorno.
             if (createResponse2 is null)
             {
                 Console.WriteLine("Cannot create ModuleIIoT");
                 channel.Dispose();
                 return;
             }
+
+            //Unidad creada
             else
             {
                 Console.WriteLine($"Creación exitosa.");
             }
+
+            
+
+            //Obteniendo un módulo por su Id
             Console.WriteLine($"Presione una tecla para obtener el modulo con Id {createResponse.Id}");
             Console.ReadKey();
             var getByIdResponse = ModuleClient.GetModuleIIoT(new GetRequest() { Id = createResponse.Id.ToString() });
+           
+            //Fallo en la obtención del módulo, retorno
             if (getByIdResponse is null)
             {
                 Console.WriteLine("Cannot get Module");
                 channel.Dispose();
                 return;
             }
+
+            //Módulo obtenido por Id
             else
             {
                 Console.WriteLine($"Obtención exitosa de los modulos {getByIdResponse.ModuleIIoT.Name}");
             }
             //Console.WriteLine($"Presione una tecla para obtener el Message con Id {createResponse1.Id}");
             //Console.ReadKey();
+
+
+            //Obteniendo unidad por su Id.
             Console.WriteLine($"Presione una tecla para obtener el unity con Id {createResponse2.Id}");
             Console.ReadKey();
             var getByIdResponse2 = UnityClient.GetUnity(new GetRequest() { Id = createResponse2.Id.ToString() });
+
+            //Fallo en la obtención de la unidad, retorno
             if (getByIdResponse2 is null)
             {
                 Console.WriteLine("Cannot get Uinty");
                 channel.Dispose();
                 return;
             }
+
+            //Unidad obtenida por Id
             else
             {
                 Console.WriteLine($"Obtención exitosa de las unidades {getByIdResponse2.Unity.Name}");
             }
 
-            //MODULOOOOOOOOO
 
+            
+            //Modificando un módulo.
             Console.WriteLine("Presione una tecla para modificar el modulo");
             Console.ReadKey();
             createResponse.IsConnected = true;
+            //Actualizando módulo modificado en base de datos.
             ModuleClient.UpdateModuleIIoT(createResponse);
             var updateResponse = ModuleClient.GetModuleIIoT(new GetRequest() { Id = createResponse.Id });
             if (updateResponse is not null &&
@@ -155,11 +192,13 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             //}
 
 
-            //UNIDADDDDDDDDD
-
+            
+            
+            //Modificando una unidad
             Console.WriteLine("Presione una tecla para modificar la unidad");
             Console.ReadKey();
             createResponse2.Area = "prueba";
+            //Actualizando en base de datos, unidad modificada.
             UnityClient.UpdateUnity(createResponse2);
             var updateResponse2 = UnityClient.GetUnity(new GetRequest() { Id = createResponse2.Id });
             if (updateResponse2 is not null &&
@@ -169,8 +208,10 @@ namespace ModuleCentralizationIIoT.ConsoleApp
                 Console.WriteLine($"modificacion exitosa");
             }
 
-            //MODULOOOOOOOO
+           
 
+
+            //Eliminando un módulo.
             Console.WriteLine("Presione una tecla para eliminar el modulo");
             Console.ReadKey();
 
@@ -193,7 +234,7 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             //}
 
 
-            //UNIDADDDDDDD
+            //Eliminando una unidad
             Console.WriteLine("Presione una tecla para eliminar la unidad");
             Console.ReadKey();
             UnityClient.DeleteUnity(new DeleteRequest() { Id = createResponse2.Id });

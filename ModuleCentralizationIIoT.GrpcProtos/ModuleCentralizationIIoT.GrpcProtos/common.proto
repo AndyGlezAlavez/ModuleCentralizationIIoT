@@ -5,7 +5,7 @@ option csharp_namespace = "ModuleCentralizationIIoT.GrpcProtos";
 package GrpcProtos;
 
 import "google/protobuf/timestamp.proto";
-
+ 
 message GetRequest{
 	string id = 1;
 }
