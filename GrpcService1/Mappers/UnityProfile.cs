@@ -1,6 +1,9 @@
-﻿using AutoMapper;
+﻿#region    USINGS
+using AutoMapper;
 using ModuleCentralizationIIoT.Domain;
 using ModuleCentralizationIIoT.GrpcProtos;
+#endregion
+
 
 namespace GrpcService1.Mappers
 {

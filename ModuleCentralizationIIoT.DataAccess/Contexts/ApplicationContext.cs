@@ -1,4 +1,4 @@
-﻿
+﻿#region   USINGS
 using Microsoft.EntityFrameworkCore;
 using ModuleCentralizationIIoT.DataAccess.FluentConfigurations;
 using ModuleCentralizationIIoT.Domain.Entities;
@@ -7,24 +7,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+#endregion
 
 namespace ModuleCentralizationIIoT.DataAccess.Contexts
 {
     public class ApplicationContext: DbContext
     {
-        #region Tables
+        // Declarando las tablas de las entidades Base
+        #region TABLES
         public DbSet<ModuleIIoT> ModuleIIoTs { get; set; }        
         public DbSet<Unity> Unities { get; set; }
         public DbSet<Message> Messages { get; set; }
         #endregion
-        #region Helpers
+
+
+        //Obteniendo Opciones del Contexto
+        #region HELPERS
         private static DbContextOptions GetOptions(string connectionString)
         {
             return SqliteDbContextOptionsBuilderExtensions.UseSqlite(
                 new DbContextOptionsBuilder(), connectionString).Options;
         }
         #endregion
+
+
+        #region   CONSTRUCTOR
         public ApplicationContext() { }
 
         public ApplicationContext(string conectionString)
@@ -36,6 +43,10 @@ namespace ModuleCentralizationIIoT.DataAccess.Contexts
             base(options)
         {
         }
+
+
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -51,6 +62,6 @@ namespace ModuleCentralizationIIoT.DataAccess.Contexts
             modelBuilder.ApplyConfiguration(new ModuleIIoTEntittyTypeConfiguration());
 
         }
-
+        #endregion
     }
 }

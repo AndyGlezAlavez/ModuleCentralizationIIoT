@@ -1,9 +1,11 @@
-﻿using System;
+﻿#region    USINGS
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace ModuleCentralizationIIoT.Domain.Entities
 {
@@ -13,7 +15,7 @@ namespace ModuleCentralizationIIoT.Domain.Entities
     /// </summary>
     public class Unity : Entity
     {
-        #region Properties
+        #region      PROPERTIES
 
         /// <summary>
         /// Nombre de la unidad.
@@ -30,9 +32,15 @@ namespace ModuleCentralizationIIoT.Domain.Entities
         /// </summary>
         public string Area { get; set; }
 
+
+
         /// Cada unidad puede ser atendida por varios módulos
         public List<ModuleIIoT> ModuleIIoTs { get; set; }
+
         #endregion
+
+
+        #region    CONSTRUCTOR
 
         ///<summary>
         /// Requerido por EntityFrameworkCore para migraciones.
@@ -52,5 +60,6 @@ namespace ModuleCentralizationIIoT.Domain.Entities
             Area = string.Empty;
         }
 
+        #endregion
     }
 }

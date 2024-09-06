@@ -1,10 +1,12 @@
-﻿using ModuleCentralizationIIoT.Domain.Entities.Types;
+﻿#region    USINGS
+using ModuleCentralizationIIoT.Domain.Entities.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace ModuleCentralizationIIoT.Domain.Entities
 {
@@ -14,7 +16,7 @@ namespace ModuleCentralizationIIoT.Domain.Entities
     /// </summary>
     public class Message :Entity
     {
-        #region Properties
+        #region      PROPERTIES
 
         /// <summary>
         /// Texto del mensaje.
@@ -31,6 +33,9 @@ namespace ModuleCentralizationIIoT.Domain.Entities
         /// </summary>
         public Priority Priority { get; set; }
 
+
+
+
         /// <summary>
         /// Relación del mensaje con su módulo correspondiente
         /// </summary>
@@ -40,8 +45,11 @@ namespace ModuleCentralizationIIoT.Domain.Entities
         /// Módulo IIoT de donde se genera el mensaje.
         /// </summary>
         public ModuleIIoT ModuleIIoT{ get; set; }
+
         #endregion
 
+
+        #region    CONSTRUCTOR
         /// <summary>
         /// Requerido por EntityFrameworkCore para migraciones.
         /// </summary>
@@ -60,5 +68,8 @@ namespace ModuleCentralizationIIoT.Domain.Entities
             CreationMessage = DateTime.Now;
             Priority = Priority.Low;
         }
+
+        #endregion
+
     }
 }

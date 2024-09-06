@@ -1,4 +1,5 @@
-﻿using ModuleCentralizationIIoT.Contracts;
+﻿#region   USINGS
+using ModuleCentralizationIIoT.Contracts;
 using ModuleCentralizationIIoT.DataAccess.Contexts;
 using ModuleCentralizationIIoT.DataAccess.Repositories.Common;
 using ModuleCentralizationIIoT.Domain.Entities;
@@ -7,29 +8,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace ModuleCentralizationIIoT.DataAccess.Repositories
 {
     public class ModuleIIoTRepository : RepositoryBase, IModuleIIoTRepository
     {
-        public ModuleIIoTRepository(ApplicationContext context) : base(context)
-        {
-        }
+        public ModuleIIoTRepository(ApplicationContext context) : base(context) {     }
 
-        public void AddModuleIIoT(ModuleIIoT moduleIIoT)
-        {
-            _context.ModuleIIoTs.Add(moduleIIoT);
-        }
+        public void AddModuleIIoT(ModuleIIoT moduleIIoT) {  _context.ModuleIIoTs.Add(moduleIIoT);  }
 
-        public void DeleteModuleIIoT(ModuleIIoT moduleIIoT)
-        {
-            _context.ModuleIIoTs.Remove(moduleIIoT);
-        }
+        public void DeleteModuleIIoT(ModuleIIoT moduleIIoT) {  _context.ModuleIIoTs.Remove(moduleIIoT);  }
 
-        public IEnumerable<ModuleIIoT> GetAllModuleIIoT()
-        {
-            return _context.ModuleIIoTs.ToList();
-        }
+        public IEnumerable<ModuleIIoT> GetAllModuleIIoT() {   return _context.ModuleIIoTs.ToList();  }
 
         public IEnumerable<Message>? GetMessageByModuleIIoT(Guid moduleId)
         {
@@ -42,9 +33,6 @@ namespace ModuleCentralizationIIoT.DataAccess.Repositories
             return _context?.ModuleIIoTs.FirstOrDefault(t => t.Id == id);
         }
 
-        public void UpdateModuleIIoT(ModuleIIoT moduleIIoT)
-        {
-             _context.ModuleIIoTs.Update(moduleIIoT);
-        }
+        public void UpdateModuleIIoT(ModuleIIoT moduleIIoT) {  _context.ModuleIIoTs.Update(moduleIIoT); }
     }
 }

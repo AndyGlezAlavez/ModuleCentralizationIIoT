@@ -1,6 +1,7 @@
-﻿using AutoMapper;
+﻿#region    USINGS
+using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
-
+#endregion
 
 namespace GrpcService1.Mappers
 {

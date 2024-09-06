@@ -1,9 +1,12 @@
-﻿using Grpc.Net.Client;
+﻿#region USINGS
+using Grpc.Net.Client;
 using ModuleCentralizationIIoT.GrpcProtos;
 using ModuleCentralizationIIoT.GrpcProtos.Message;
 using ModuleCentralizationIIoT.GrpcProtos.ModulesIIoT;
 using ModuleCentralizationIIoT.GrpcProtos.Unity;
+using System.Net;
 using System.Threading.Channels;
+#endregion
 
 namespace ModuleCentralizationIIoT.ConsoleApp
 {
@@ -14,7 +17,7 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             //Inicio del programa
             Console.WriteLine("Presione una tecla para conectar");
             Console.ReadKey();
-            
+
             //Creando un canal y un cliente
             Console.WriteLine("Creating channel and client");
             var httpHandler = new HttpClientHandler();
@@ -35,38 +38,12 @@ namespace ModuleCentralizationIIoT.ConsoleApp
 
             //bool cicle = true;
             //string OptionSelect = "";
-            //string DateTypeSelect = "";
+            //string Date
 
 
+            #region    CREATING       MESSAGE
 
 
-            //MODULOOOOOO
-            Console.WriteLine("Presione una tecla para Crear el modulo");
-            Console.ReadKey();
-            var createResponse = ModuleClient.CreateModuleIIoT(new CreateModuleIIoTRequest()
-            {
-                Name = "Module ZigBee",
-                AddressIp = "192.168.156.0",
-            }
-            );
-
-            //Fallo en la creación del módulo, retorno
-            if (createResponse is null)
-            {
-                Console.WriteLine("Cannot create ModuleIIoT");
-                channel.Dispose();
-                return;
-            }
-            
-            //Módulo creado
-            else
-            {
-                Console.WriteLine($"Creación exitosa.");
-            }
-
-
-
-            //MENSAGEEEEEEEE
             Console.WriteLine("Presione una tecla para Crear el message");
             Console.ReadKey();
             var createResponse1 = MessageClient.CreateMessage(new CreateMessageRequest()
@@ -91,9 +68,35 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             }
 
 
+            #endregion
 
+            #region  CREATING     MODULE
+            Console.WriteLine("Presione una tecla para Crear el modulo");
+            Console.ReadKey();
+            var createResponse = ModuleClient.CreateModuleIIoT(new CreateModuleIIoTRequest()
+            {
+                Name = "Module ZigBee",
+                AddressIp = "192.168.156.0",
+            }
+            );
 
-            //UNIDADDDDDDDDDD
+            //Fallo en la creación del módulo, retorno
+            if (createResponse is null)
+            {
+                Console.WriteLine("Cannot create ModuleIIoT");
+                channel.Dispose();
+                return;
+            }
+
+            //Módulo creado
+            else
+            {
+                Console.WriteLine($"Creación exitosa.");
+            }
+            #endregion
+
+            #region  CREATING       UNITY
+
             Console.WriteLine("Presione una tecla para Crear la unidad");
             Console.ReadKey();
 
@@ -118,13 +121,19 @@ namespace ModuleCentralizationIIoT.ConsoleApp
                 Console.WriteLine($"Creación exitosa.");
             }
 
-            
+            #endregion
+
+
+
+
+
+            #region      MODULE  BY  ID
 
             //Obteniendo un módulo por su Id
             Console.WriteLine($"Presione una tecla para obtener el modulo con Id {createResponse.Id}");
             Console.ReadKey();
             var getByIdResponse = ModuleClient.GetModuleIIoT(new GetRequest() { Id = createResponse.Id.ToString() });
-           
+
             //Fallo en la obtención del módulo, retorno
             if (getByIdResponse is null)
             {
@@ -137,10 +146,34 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             else
             {
                 Console.WriteLine($"Obtención exitosa de los modulos {getByIdResponse.ModuleIIoT.Name}");
-            }
+            } 
+        
+
+            #endregion
+
+            #region    MESSAGE  BY  ID
+
             //Console.WriteLine($"Presione una tecla para obtener el Message con Id {createResponse1.Id}");
             //Console.ReadKey();
 
+           // var getByIdResponse1 = MessageClient.GetMessage(new GetRequest() { Id = createResponse1.Id.ToString() });
+
+            //Fallo en la obtención del mensaje, retorno
+           // if (getByIdResponse1 is null)
+            //{
+              //  Console.WriteLine("Cannot get Message");
+             //   channel.Dispose();
+            //    return;
+           // }
+
+            //Módulo obtenido por Id
+            else
+            {
+                Console.WriteLine($"Obtención exitosa de los modulos {getByIdResponse.ModuleIIoT.Name}");
+            }
+            #endregion
+
+            #region    UNITY  BY  ID
 
             //Obteniendo unidad por su Id.
             Console.WriteLine($"Presione una tecla para obtener el unity con Id {createResponse2.Id}");
@@ -161,8 +194,14 @@ namespace ModuleCentralizationIIoT.ConsoleApp
                 Console.WriteLine($"Obtención exitosa de las unidades {getByIdResponse2.Unity.Name}");
             }
 
+            #endregion
 
-            
+
+
+
+
+            #region    MODIFYING   MODULE
+
             //Modificando un módulo.
             Console.WriteLine("Presione una tecla para modificar el modulo");
             Console.ReadKey();
@@ -177,6 +216,9 @@ namespace ModuleCentralizationIIoT.ConsoleApp
                 Console.WriteLine($"modificacion exitosa");
             }
 
+            #endregion
+
+            #region     MODIFYING  MESSAGE
             //MENSAGEEEEEEE
             //Console.WriteLine("Presione una tecla para modificar el modulo");
             //Console.ReadKey();
@@ -191,9 +233,9 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             //    Console.WriteLine($"modificacion exitosa");
             //}
 
+            #endregion
 
-            
-            
+            #region     MODIFYING   UNITY
             //Modificando una unidad
             Console.WriteLine("Presione una tecla para modificar la unidad");
             Console.ReadKey();
@@ -208,8 +250,13 @@ namespace ModuleCentralizationIIoT.ConsoleApp
                 Console.WriteLine($"modificacion exitosa");
             }
 
-           
+            #endregion
 
+
+
+
+
+            #region    ELIMINATING   MODULE
 
             //Eliminando un módulo.
             Console.WriteLine("Presione una tecla para eliminar el modulo");
@@ -221,7 +268,9 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             {
                 Console.WriteLine($"Eliminación exitosa.");
             }
+            #endregion
 
+            #region     ELIMINATING   MESSAGE
             //MENSAGEEEEEEEE
             //Console.WriteLine("Presione una tecla para eliminar el mensaje");
             //Console.ReadKey();
@@ -233,7 +282,9 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             //    Console.WriteLine($"Eliminación exitosa.");
             //}
 
+            #endregion
 
+            #region    ELIMINATING    UNITY
             //Eliminando una unidad
             Console.WriteLine("Presione una tecla para eliminar la unidad");
             Console.ReadKey();
@@ -244,6 +295,8 @@ namespace ModuleCentralizationIIoT.ConsoleApp
             {
                 Console.WriteLine($"Eliminación exitosa.");
             }
+            #endregion
+
 
             channel.Dispose();
 

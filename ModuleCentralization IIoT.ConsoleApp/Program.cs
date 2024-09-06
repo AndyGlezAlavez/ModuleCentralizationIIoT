@@ -1,9 +1,12 @@
-﻿using ModuleCentralizationIIoT.Contracts;
+﻿#region    USINGS
+using ModuleCentralizationIIoT.Contracts;
 using ModuleCentralizationIIoT.DataAccess;
 using ModuleCentralizationIIoT.DataAccess.Contexts;
 using ModuleCentralizationIIoT.DataAccess.Repositories;
 using ModuleCentralizationIIoT.DataAccess.Test.Utilities;
 using ModuleCentralizationIIoT.Domain.Entities;
+#endregion
+
 
 namespace ModuleCentralization_IIoT.ConsoleApp
 {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region   USINGS
+using Microsoft.EntityFrameworkCore;
 using ModuleCentralizationIIoT.Contracts;
 using ModuleCentralizationIIoT.DataAccess.Contexts;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+#endregion
 
 namespace ModuleCentralizationIIoT.DataAccess
 {

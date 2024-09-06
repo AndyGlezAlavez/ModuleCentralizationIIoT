@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿#region    USINGS
+using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MediatR;
@@ -12,6 +13,7 @@ using ModuleCentralizationIIoT.Application.UnityCQRS.Queries.GetAllUnity;
 using ModuleCentralizationIIoT.Application.ModuleCQRS.Queries.GetModuleIIoTById;
 using ModuleCentralizationIIoT.GrpcProtos.ModulesIIoT;
 using ModuleCentralizationIIoT.Application.UnityCQRS.Queries.GetUnityById;
+#endregion
 
 namespace GrpcService1.Services
 {

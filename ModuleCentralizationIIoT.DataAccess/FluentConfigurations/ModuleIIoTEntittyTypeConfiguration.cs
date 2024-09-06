@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#region
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ModuleCentralizationIIoT.DataAccess.FluentConfigurations.Common;
 using ModuleCentralizationIIoT.Domain.Entities;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace ModuleCentralizationIIoT.DataAccess.FluentConfigurations
 {

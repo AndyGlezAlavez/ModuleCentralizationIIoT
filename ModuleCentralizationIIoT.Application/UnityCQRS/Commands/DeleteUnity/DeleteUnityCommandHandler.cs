@@ -1,4 +1,5 @@
-﻿using ModuleCentralizationIIoT.Application.Abstract;
+﻿#region    USINGS
+using ModuleCentralizationIIoT.Application.Abstract;
 using ModuleCentralizationIIoT.Contracts;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+#endregion
 
 namespace ModuleCentralizationIIoT.Application.UnityCQRS.Commands.DeleteUnity
 {

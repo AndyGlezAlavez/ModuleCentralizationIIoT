@@ -1,4 +1,6 @@
-﻿using ModuleCentralizationIIoT.Contracts;
+﻿#region     USINGS
+
+using ModuleCentralizationIIoT.Contracts;
 using ModuleCentralizationIIoT.DataAccess.Contexts;
 using ModuleCentralizationIIoT.DataAccess.Repositories;
 using ModuleCentralizationIIoT.DataAccess.Test.Utilities;
@@ -8,9 +10,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace ModuleCentralizationIIoT.DataAccess.Test
 {
+    #region   TEST   CLASS
+
     [TestClass]
     public class ModuleIIoTTest
     {
@@ -24,6 +29,13 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
         }
         [DataRow("Modulo ZigBee", "192.168.140.0")]
         [DataRow("Modulo LTE", "255.255.255.5")]
+
+        #endregion
+
+
+        #region   TEST   METHOD
+
+        #region   ADD
 
         [TestMethod]
 
@@ -46,6 +58,11 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
         }
 
         [DataRow(0)]
+
+        #endregion
+
+        #region   GET
+
         [TestMethod]
 
         public void Can_Get_ModuleIIoT_By_Id(int position)
@@ -74,6 +91,11 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             Assert.IsNotNull(loadedModuleIIoT);
         }
         [DataRow(0)]
+
+        #endregion
+
+        #region    DELETE
+
         [TestMethod]
 
         public void Can_Delete_ModuleIIoT(int position) 
@@ -98,6 +120,11 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
         }
 
         [DataRow(0)]
+
+        #endregion
+
+        #region    UPDATE
+
         [TestMethod]
 
         public void Can_Update_ModuleIIoT(int position)
@@ -119,6 +146,9 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             Assert.AreEqual(updateModuleIIoT.Name, moduleIIoT.Name);
 
         }
+        #endregion
 
     }
+    #endregion
+
 }

@@ -1,4 +1,5 @@
-﻿using ModuleCentralizationIIoT.Contracts;
+﻿#region     USINGS
+using ModuleCentralizationIIoT.Contracts;
 using ModuleCentralizationIIoT.DataAccess.Contexts;
 using ModuleCentralizationIIoT.DataAccess.Repositories;
 using ModuleCentralizationIIoT.DataAccess.Test.Utilities;
@@ -9,9 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace ModuleCentralizationIIoT.DataAccess.Test
 {
+
+    #region    TEST  CLASS
+
     [TestClass]
     public class MessageTest
     {
@@ -30,6 +35,11 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
         [DataRow(0,"Hellow World", "Modulo ZigBee", "192.168.140.0")]
         [DataRow(0,"Bye World"," Modulo LTE", "255.255.255.5")]
 
+        #endregion
+
+        #region    TEST   METHOD
+
+        #region    ADD 
         [TestMethod]
         public void Can_Add_Message(
             int moduleIIoTposition,
@@ -54,6 +64,10 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
 
         }
         [DataRow(0)]
+        #endregion
+
+        #region     GET
+
         [TestMethod]
         public void Can_Get_Message_By_Id(int position)
         {
@@ -70,6 +84,10 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             //Assert
             Assert.IsNotNull(loadedMessage);
         }
+        #endregion
+
+        #region  CANNOT  GET
+
         [TestMethod]
         public void Cannot_Get_Message_By_Invalid_Id()
         {
@@ -82,6 +100,10 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             Assert.IsNull(loadedMessage);
         }
         [DataRow(0)]
+        #endregion
+
+        #region    DELETE
+
         [TestMethod]
         public void Can_Delete_Message(int position)
         {
@@ -104,6 +126,10 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             Assert.IsNotNull(messages);
         }
         [DataRow(0)]
+        #endregion
+
+        #region  UPDATE
+
         [TestMethod]
 
         public void Can_Update_Message(int position)
@@ -126,6 +152,9 @@ namespace ModuleCentralizationIIoT.DataAccess.Test
             Assert.AreEqual(updatedMessage.Text, message.Text);
         
         }
+        #endregion
 
+
+        #endregion
     }
 }

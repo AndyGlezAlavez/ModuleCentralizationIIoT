@@ -1,10 +1,12 @@
-﻿using System;
+﻿#region    USINGS
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace ModuleCentralizationIIoT.Domain.Entities
 {
@@ -14,7 +16,7 @@ namespace ModuleCentralizationIIoT.Domain.Entities
     /// </summary>
     public class ModuleIIoT :Entity
     {
-        #region Properties
+        #region     PROPERTIES
 
         /// <summary>
         /// Nombre del módulo.
@@ -36,6 +38,9 @@ namespace ModuleCentralizationIIoT.Domain.Entities
         /// </summary>
         public bool IsConnected { get; set; }
 
+
+
+
         /// <summary>
         /// Relación módulos-unidades
         /// </summary>
@@ -45,7 +50,11 @@ namespace ModuleCentralizationIIoT.Domain.Entities
         /// Relación módulo-mensajes.
         /// </summary>
         public List<Message> Messages { get; set; }
+
         #endregion
+
+
+        #region    CONSTRUCTOR
 
         /// <summary>
         /// Requerido por EntityFrameworkCore para migraciones.
@@ -76,5 +85,6 @@ namespace ModuleCentralizationIIoT.Domain.Entities
             AccessPort = "0";
         }
 
+        #endregion
     }
 }
