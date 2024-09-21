@@ -7,16 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Utilities\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.31" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.31">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModuleCentralizationIIoT.Domain\ModuleCentralizationIIoT.Domain.csproj" />
   </ItemGroup>
 
 </Project>
